@@ -298,6 +298,12 @@
       - updated_at
       filter: {}
       check: {}
+  - role: teacher
+    permission:
+      columns:
+      - content
+      filter: {}
+      check: {}
 - table:
     schema: public
     name: article_liker
@@ -2356,6 +2362,29 @@
   - role: student
     permission:
       filter: {}
+- table:
+    schema: public
+    name: thuai_code
+- table:
+    schema: public
+    name: thuai_manager
+  object_relationships:
+  - name: manager_user
+    using:
+      foreign_key_constraint_on: manager_id
+- table:
+    schema: public
+    name: thuai_room
+- table:
+    schema: public
+    name: thuai_room_team
+  object_relationships:
+  - name: thuai_room
+    using:
+      foreign_key_constraint_on: room_id
+  - name: thuai_team
+    using:
+      foreign_key_constraint_on: thuai_team_id
 - table:
     schema: public
     name: user
