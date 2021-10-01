@@ -683,7 +683,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T15:59:59+00:00"
       columns:
       - attachment_url
       - honor
@@ -711,7 +711,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
       columns:
       - attachment_url
       - honor
@@ -826,13 +826,13 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
   delete_permissions:
   - role: EEsenior
     permission:
