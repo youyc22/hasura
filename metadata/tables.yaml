@@ -670,6 +670,84 @@
       filter: {}
 - table:
     schema: public
+    name: contest_info
+  insert_permissions:
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  - role: EEsenior
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+  update_permissions:
+  - role: root
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: root
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: honor_application
   object_relationships:
   - name: student
@@ -683,7 +761,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2021-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
       columns:
       - attachment_url
       - honor
@@ -793,13 +871,13 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2020-10-05T15:59:59+00:00"
+            _lt: "2021-10-05T23:59:59+00:00"
   - role: root
     permission:
       columns:
