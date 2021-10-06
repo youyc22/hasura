@@ -761,7 +761,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       columns:
       - attachment_url
       - honor
@@ -789,7 +789,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       columns:
       - attachment_url
       - honor
@@ -871,13 +871,13 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
   - role: root
     permission:
       columns:
@@ -904,27 +904,33 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
   delete_permissions:
   - role: EEsenior
     permission:
       filter:
-        student_id:
-          _eq: X-Hasura-User-Id
+        _and:
+        - student_id:
+            _eq: X-Hasura-User-Id
+        - created_at:
+            _lt: "2021-10-06T09:00:00+00:00"
   - role: root
     permission:
       filter: {}
   - role: student
     permission:
       filter:
-        student_id:
-          _eq: X-Hasura-User-Id
+        _and:
+        - student_id:
+            _eq: X-Hasura-User-Id
+        - created_at:
+            _lt: "2021-10-06T09:00:00+00:00"
 - table:
     schema: public
     name: info_notice
