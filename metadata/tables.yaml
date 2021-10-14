@@ -672,6 +672,18 @@
     schema: public
     name: contest_info
   insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_type
+      backend_only: false
   - role: root
     permission:
       check: {}
@@ -730,6 +742,18 @@
       - id
       filter: {}
   update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      check: null
   - role: root
     permission:
       columns:
@@ -743,6 +767,9 @@
       filter: {}
       check: {}
   delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
   - role: root
     permission:
       filter: {}
