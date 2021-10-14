@@ -672,6 +672,18 @@
     schema: public
     name: contest_info
   insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_type
+      backend_only: false
   - role: root
     permission:
       check: {}
@@ -730,6 +742,18 @@
       - id
       filter: {}
   update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - content
+      - contest_type
+      - files
+      - title
+      - created_at
+      - updated_at
+      - id
+      filter: {}
+      check: null
   - role: root
     permission:
       columns:
@@ -743,6 +767,9 @@
       filter: {}
       check: {}
   delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
   - role: root
     permission:
       filter: {}
@@ -761,7 +788,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       columns:
       - attachment_url
       - honor
@@ -789,7 +816,7 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - created_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       columns:
       - attachment_url
       - honor
@@ -871,13 +898,13 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
   - role: root
     permission:
       columns:
@@ -904,27 +931,33 @@
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
       check:
         _and:
         - student_id:
             _eq: X-Hasura-User-Id
         - updated_at:
-            _lt: "2021-10-05T23:59:59+00:00"
+            _lt: "2021-10-06T09:00:00+00:00"
   delete_permissions:
   - role: EEsenior
     permission:
       filter:
-        student_id:
-          _eq: X-Hasura-User-Id
+        _and:
+        - student_id:
+            _eq: X-Hasura-User-Id
+        - created_at:
+            _lt: "2021-10-06T09:00:00+00:00"
   - role: root
     permission:
       filter: {}
   - role: student
     permission:
       filter:
-        student_id:
-          _eq: X-Hasura-User-Id
+        _and:
+        - student_id:
+            _eq: X-Hasura-User-Id
+        - created_at:
+            _lt: "2021-10-06T09:00:00+00:00"
 - table:
     schema: public
     name: info_notice
