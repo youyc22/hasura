@@ -713,6 +713,9 @@
     schema: public
     name: contest_team
   object_relationships:
+  - name: team_contest_id
+    using:
+      foreign_key_constraint_on: contest_id
   - name: team_leader_id
     using:
       foreign_key_constraint_on: team_leader
