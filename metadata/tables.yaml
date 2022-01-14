@@ -677,6 +677,10 @@
 - table:
     schema: public
     name: contest_info
+  object_relationships:
+  - name: contest_id_info
+    using:
+      foreign_key_constraint_on: contest_id
   delete_permissions:
   - role: counselor
     permission:
