@@ -681,7 +681,42 @@
   - name: contest_id_info
     using:
       foreign_key_constraint_on: contest_id
+  insert_permissions:
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - content
+      - contest_id
+      - created_at
+      - files
+      - id
+      - title
+      - updated_at
+      backend_only: false
   select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
   - role: student
     permission:
       columns:
@@ -704,6 +739,19 @@
       - title
       - contest_id
       filter: {}
+  update_permissions:
+  - role: root
+    permission:
+      columns:
+      - content
+      - contest_id
+      - created_at
+      - files
+      - id
+      - title
+      - updated_at
+      filter: {}
+      check: {}
   delete_permissions:
   - role: counselor
     permission:
