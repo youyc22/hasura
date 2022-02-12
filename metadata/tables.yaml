@@ -681,6 +681,77 @@
   - name: contest_id_info
     using:
       foreign_key_constraint_on: contest_id
+  insert_permissions:
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - content
+      - contest_id
+      - created_at
+      - files
+      - id
+      - title
+      - updated_at
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
+  - role: teacher
+    permission:
+      columns:
+      - id
+      - created_at
+      - updated_at
+      - content
+      - files
+      - title
+      - contest_id
+      filter: {}
+  update_permissions:
+  - role: root
+    permission:
+      columns:
+      - content
+      - contest_id
+      - created_at
+      - files
+      - id
+      - title
+      - updated_at
+      filter: {}
+      check: {}
   delete_permissions:
   - role: counselor
     permission:
@@ -731,6 +802,66 @@
         table:
           schema: public
           name: contest_team_member
+  insert_permissions:
+  - role: student
+    permission:
+      check: {}
+      columns:
+      - team_id
+      - team_name
+      - team_intro
+      - team_leader
+      - created_at
+      - updated_at
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - member_num
+      - contest_id
+      backend_only: false
+  select_permissions:
+  - role: student
+    permission:
+      columns:
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - team_intro
+      - team_leader
+      - team_name
+      - created_at
+      - updated_at
+      - contest_id
+      - team_id
+      - member_num
+      filter: {}
+  update_permissions:
+  - role: student
+    permission:
+      columns:
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - team_intro
+      - team_leader
+      - team_name
+      - created_at
+      - updated_at
+      - contest_id
+      - team_id
+      - member_num
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: student
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_team_member
@@ -741,6 +872,33 @@
   - name: user_as_contest_team_member
     using:
       foreign_key_constraint_on: user_id
+  insert_permissions:
+  - role: student
+    permission:
+      check: {}
+      columns:
+      - team_id
+      - user_id
+      backend_only: false
+  select_permissions:
+  - role: student
+    permission:
+      columns:
+      - user_id
+      - team_id
+      filter: {}
+  update_permissions:
+  - role: student
+    permission:
+      columns:
+      - user_id
+      - team_id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: student
+    permission:
+      filter: {}
 - table:
     schema: public
     name: honor_application
