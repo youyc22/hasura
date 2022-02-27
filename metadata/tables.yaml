@@ -671,6 +671,88 @@
 - table:
     schema: public
     name: contest
+  insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - id
+      - start_date
+      backend_only: false
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - id
+      - start_date
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - id
+      - start_date
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - id
+      - start_date
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - id
+      - start_date
+      filter: {}
+  update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - start_date
+      filter: {}
+      check: {}
+  - role: root
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - start_date
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: root
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_code
@@ -763,9 +845,68 @@
     schema: public
     name: contest_manager
   object_relationships:
+  - name: contest
+    using:
+      foreign_key_constraint_on: contest_id
   - name: user
     using:
       foreign_key_constraint_on: user_id
+  insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - user_id
+      - contest_id
+      backend_only: false
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - user_id
+      - contest_id
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - user_id
+      - contest_id
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - user_id
+      - contest_id
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - contest_id
+      - user_id
+      filter: {}
+  update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - user_id
+      - contest_id
+      filter: {}
+      check: {}
+  - role: root
+    permission:
+      columns:
+      - user_id
+      - contest_id
+      filter: {}
+      check: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: root
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_room
@@ -803,25 +944,102 @@
           schema: public
           name: contest_team_member
   insert_permissions:
+  - role: EEsenior
+    permission:
+      check: {}
+      columns:
+      - created_at
+      - invited_code
+      - member_num
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
+      backend_only: false
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - contest_id
+      - created_at
+      - invited_code
+      - member_num
+      - score
+      - status
+      - status2
+      - status3
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
+      backend_only: false
   - role: student
     permission:
       check: {}
       columns:
+      - created_at
+      - invited_code
+      - member_num
       - team_id
-      - team_name
       - team_intro
       - team_leader
-      - created_at
+      - team_name
       - updated_at
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
       - invited_code
       - score
       - status
       - status2
       - status3
-      - member_num
+      - team_intro
+      - team_leader
+      - team_name
+      - created_at
+      - updated_at
       - contest_id
-      backend_only: false
-  select_permissions:
+      - team_id
+      - member_num
+      filter: {}
+  - role: EEsenior
+    permission:
+      columns:
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - team_intro
+      - team_leader
+      - team_name
+      - created_at
+      - updated_at
+      - contest_id
+      - team_id
+      - member_num
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - team_intro
+      - team_leader
+      - team_name
+      - created_at
+      - updated_at
+      - contest_id
+      - team_id
+      - member_num
+      filter: {}
   - role: student
     permission:
       columns:
@@ -840,25 +1058,52 @@
       - member_num
       filter: {}
   update_permissions:
-  - role: student
+  - role: EEsenior
     permission:
       columns:
+      - created_at
       - invited_code
-      - score
-      - status
-      - status2
-      - status3
+      - member_num
+      - team_id
       - team_intro
       - team_leader
       - team_name
-      - created_at
       - updated_at
-      - contest_id
-      - team_id
+      filter: {}
+      check: null
+  - role: root
+    permission:
+      columns:
+      - created_at
+      - invited_code
       - member_num
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
+      filter: {}
+      check: null
+  - role: student
+    permission:
+      columns:
+      - created_at
+      - invited_code
+      - member_num
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
       filter: {}
       check: null
   delete_permissions:
+  - role: EEsenior
+    permission:
+      filter: {}
+  - role: root
+    permission:
+      filter: {}
   - role: student
     permission:
       filter: {}
@@ -881,6 +1126,18 @@
       - user_id
       backend_only: false
   select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - user_id
+      - team_id
+      filter: {}
+  - role: root
+    permission:
+      columns:
+      - team_id
+      - user_id
+      filter: {}
   - role: student
     permission:
       columns:
