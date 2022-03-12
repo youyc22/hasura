@@ -944,6 +944,24 @@
           schema: public
           name: contest_team_member
   insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - team_id
+      - team_name
+      - team_intro
+      - team_leader
+      - created_at
+      - updated_at
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - member_num
+      - contest_id
+      backend_only: false
   - role: EEsenior
     permission:
       check: {}
