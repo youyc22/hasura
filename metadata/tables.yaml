@@ -1077,6 +1077,24 @@
       - member_num
       filter: {}
   update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - team_id
+      - team_name
+      - team_intro
+      - team_leader
+      - created_at
+      - updated_at
+      - invited_code
+      - score
+      - status
+      - status2
+      - status3
+      - member_num
+      - contest_id
+      filter: {}
+      check: null
   - role: EEsenior
     permission:
       columns:
@@ -1137,6 +1155,13 @@
     using:
       foreign_key_constraint_on: user_id
   insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - team_id
+      - user_id
+      backend_only: false
   - role: student
     permission:
       check: {}
@@ -1164,6 +1189,13 @@
       - team_id
       filter: {}
   update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - user_id
+      - team_id
+      filter: {}
+      check: null
   - role: student
     permission:
       columns:
@@ -1172,6 +1204,9 @@
       filter: {}
       check: null
   delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
   - role: student
     permission:
       filter: {}
