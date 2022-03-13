@@ -3255,9 +3255,6 @@
   - name: thuai_room
     using:
       foreign_key_constraint_on: room_id
-  - name: thuai_room_teams
-    using:
-      foreign_key_constraint_on: thuai_team_id
   insert_permissions:
   - role: EEsenior
     permission:
