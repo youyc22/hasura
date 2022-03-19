@@ -925,6 +925,9 @@
   - name: contest_room
     using:
       foreign_key_constraint_on: room_id
+  - name: contest_team
+    using:
+      foreign_key_constraint_on: team_id
 - table:
     schema: public
     name: contest_team
