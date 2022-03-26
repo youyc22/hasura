@@ -951,19 +951,20 @@
     permission:
       check: {}
       columns:
-      - team_id
-      - team_name
-      - team_intro
-      - team_leader
+      - contest_id
       - created_at
-      - updated_at
       - invited_code
+      - member_num
       - score
       - status
       - status2
       - status3
-      - member_num
-      - contest_id
+      - submitted_code_num
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
       backend_only: false
   - role: EEsenior
     permission:
@@ -982,19 +983,20 @@
     permission:
       check: {}
       columns:
-      - contest_id
-      - created_at
+      - submitted_code_num
       - invited_code
-      - member_num
       - score
       - status
       - status2
       - status3
-      - team_id
       - team_intro
       - team_leader
       - team_name
+      - created_at
       - updated_at
+      - contest_id
+      - team_id
+      - member_num
       backend_only: false
   - role: student
     permission:
@@ -1004,6 +1006,7 @@
       - created_at
       - invited_code
       - member_num
+      - submitted_code_num
       - team_id
       - team_intro
       - team_leader
@@ -1014,6 +1017,7 @@
   - role: counselor
     permission:
       columns:
+      - submitted_code_num
       - invited_code
       - score
       - status
@@ -1031,23 +1035,25 @@
   - role: EEsenior
     permission:
       columns:
+      - contest_id
+      - created_at
       - invited_code
+      - member_num
       - score
       - status
       - status2
       - status3
+      - submitted_code_num
+      - team_id
       - team_intro
       - team_leader
       - team_name
-      - created_at
       - updated_at
-      - contest_id
-      - team_id
-      - member_num
       filter: {}
   - role: root
     permission:
       columns:
+      - submitted_code_num
       - invited_code
       - score
       - status
@@ -1065,37 +1071,38 @@
   - role: student
     permission:
       columns:
+      - contest_id
+      - created_at
       - invited_code
+      - member_num
       - score
       - status
       - status2
       - status3
+      - submitted_code_num
+      - team_id
       - team_intro
       - team_leader
       - team_name
-      - created_at
       - updated_at
-      - contest_id
-      - team_id
-      - member_num
       filter: {}
   update_permissions:
   - role: counselor
     permission:
       columns:
-      - team_id
-      - team_name
-      - team_intro
-      - team_leader
       - created_at
-      - updated_at
       - invited_code
+      - member_num
       - score
       - status
       - status2
       - status3
-      - member_num
-      - contest_id
+      - submitted_code_num
+      - team_id
+      - team_intro
+      - team_leader
+      - team_name
+      - updated_at
       filter: {}
       check: null
   - role: EEsenior
@@ -1117,6 +1124,7 @@
       - created_at
       - invited_code
       - member_num
+      - submitted_code_num
       - team_id
       - team_intro
       - team_leader
@@ -1130,6 +1138,7 @@
       - created_at
       - invited_code
       - member_num
+      - submitted_code_num
       - team_id
       - team_intro
       - team_leader
@@ -1138,6 +1147,9 @@
       filter: {}
       check: null
   delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
   - role: EEsenior
     permission:
       filter: {}
