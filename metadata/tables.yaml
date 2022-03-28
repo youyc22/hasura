@@ -1177,6 +1177,13 @@
       - team_id
       - user_id
       backend_only: false
+  - role: root
+    permission:
+      check: {}
+      columns:
+      - user_id
+      - team_id
+      backend_only: false
   - role: student
     permission:
       check: {}
@@ -1211,6 +1218,13 @@
       - team_id
       filter: {}
       check: null
+  - role: root
+    permission:
+      columns:
+      - user_id
+      - team_id
+      filter: {}
+      check: {}
   - role: student
     permission:
       columns:
@@ -1220,6 +1234,9 @@
       check: null
   delete_permissions:
   - role: counselor
+    permission:
+      filter: {}
+  - role: root
     permission:
       filter: {}
   - role: student
