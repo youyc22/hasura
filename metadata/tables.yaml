@@ -776,6 +776,14 @@
       - title
       - updated_at
       backend_only: false
+  - role: student
+    permission:
+      check: {}
+      columns:
+      - content
+      - files
+      - title
+      backend_only: false
   select_permissions:
   - role: counselor
     permission:
@@ -834,11 +842,22 @@
       - updated_at
       filter: {}
       check: {}
+  - role: student
+    permission:
+      columns:
+      - content
+      - files
+      - title
+      filter: {}
+      check: {}
   delete_permissions:
   - role: counselor
     permission:
       filter: {}
   - role: root
+    permission:
+      filter: {}
+  - role: student
     permission:
       filter: {}
 - table:
