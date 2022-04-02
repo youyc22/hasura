@@ -764,6 +764,15 @@
     using:
       foreign_key_constraint_on: contest_id
   insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - content
+      - contest_id
+      - files
+      - title
+      backend_only: false
   - role: root
     permission:
       check: {}
@@ -781,6 +790,10 @@
       check: {}
       columns:
       - content
+<<<<<<< HEAD
+      - contest_id
+=======
+>>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       backend_only: false
@@ -830,6 +843,15 @@
       - contest_id
       filter: {}
   update_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - content
+      - contest_id
+      - files
+      - title
+      filter: {}
+      check: null
   - role: root
     permission:
       columns:
@@ -846,6 +868,10 @@
     permission:
       columns:
       - content
+<<<<<<< HEAD
+      - contest_id
+=======
+>>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       filter: {}
