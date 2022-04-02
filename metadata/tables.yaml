@@ -790,7 +790,10 @@
       check: {}
       columns:
       - content
+<<<<<<< HEAD
       - contest_id
+=======
+>>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       backend_only: false
@@ -865,7 +868,10 @@
     permission:
       columns:
       - content
+<<<<<<< HEAD
       - contest_id
+=======
+>>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       filter: {}
