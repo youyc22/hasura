@@ -790,10 +790,7 @@
       check: {}
       columns:
       - content
-<<<<<<< HEAD
       - contest_id
-=======
->>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       backend_only: false
@@ -868,10 +865,7 @@
     permission:
       columns:
       - content
-<<<<<<< HEAD
       - contest_id
-=======
->>>>>>> ff86dec9ecbef8351b828e5366327366184d1941
       - files
       - title
       filter: {}
@@ -963,6 +957,46 @@
         table:
           schema: public
           name: contest_room_team
+  insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - status
+      - result
+      - created_at
+      - room_id
+      - contest_id
+      backend_only: false
+  - role: student
+    permission:
+      check: {}
+      columns:
+      - status
+      - result
+      - created_at
+      - room_id
+      - contest_id
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - status
+      - result
+      - created_at
+      - room_id
+      - contest_id
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - status
+      - result
+      - created_at
+      - room_id
+      - contest_id
+      filter: {}
 - table:
     schema: public
     name: contest_room_team
@@ -973,6 +1007,34 @@
   - name: contest_team
     using:
       foreign_key_constraint_on: team_id
+  insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - room_id
+      - team_id
+      backend_only: false
+  - role: student
+    permission:
+      check: {}
+      columns:
+      - room_id
+      - team_id
+      backend_only: false
+  select_permissions:
+  - role: counselor
+    permission:
+      columns:
+      - room_id
+      - team_id
+      filter: {}
+  - role: student
+    permission:
+      columns:
+      - team_id
+      - room_id
+      filter: {}
 - table:
     schema: public
     name: contest_team
