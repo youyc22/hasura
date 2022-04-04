@@ -756,6 +756,22 @@
 - table:
     schema: public
     name: contest_code
+  insert_permissions:
+  - role: counselor
+    permission:
+      check: {}
+      columns:
+      - contest_name
+      - team_id
+      - code1
+      - code2
+      - code3
+      - code4
+      - code5
+      - code6
+      - created_at
+      - updated_at
+      backend_only: false
 - table:
     schema: public
     name: contest_info
