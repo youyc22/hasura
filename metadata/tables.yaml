@@ -756,22 +756,13 @@
 - table:
     schema: public
     name: contest_code
-  insert_permissions:
-  - role: counselor
-    permission:
-      check: {}
-      columns:
-      - contest_name
-      - team_id
-      - code1
-      - code2
-      - code3
-      - code4
-      - code5
-      - code6
-      - created_at
-      - updated_at
-      backend_only: false
+  object_relationships:
+  - name: code_contest_id
+    using:
+      foreign_key_constraint_on: contest_id
+  - name: code_team_id
+    using:
+      foreign_key_constraint_on: team_id
 - table:
     schema: public
     name: contest_info
