@@ -1199,7 +1199,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1229,7 +1229,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1263,7 +1263,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1283,7 +1283,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1299,7 +1299,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1319,7 +1319,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1337,7 +1337,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
