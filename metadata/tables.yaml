@@ -1131,6 +1131,13 @@
       - room_id
       - contest_id
       filter: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: student
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_room_team
@@ -1169,6 +1176,13 @@
       - team_id
       - room_id
       filter: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: student
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_team
@@ -1199,7 +1213,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1229,7 +1243,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1263,7 +1277,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1283,7 +1297,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1299,7 +1313,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - team_intro
       - team_leader
       - team_name
@@ -1319,7 +1333,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
@@ -1337,7 +1351,7 @@
       - score
       - status
       - status2
-      - status3
+      - contest_score
       - submitted_code_num
       - team_id
       - team_intro
