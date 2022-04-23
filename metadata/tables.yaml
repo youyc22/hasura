@@ -1131,6 +1131,13 @@
       - room_id
       - contest_id
       filter: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: student
+    permission:
+      filter: {}
 - table:
     schema: public
     name: contest_room_team
@@ -1168,6 +1175,13 @@
       columns:
       - team_id
       - room_id
+      filter: {}
+  delete_permissions:
+  - role: counselor
+    permission:
+      filter: {}
+  - role: student
+    permission:
       filter: {}
 - table:
     schema: public
