@@ -753,6 +753,17 @@
       - status
       filter: {}
       check: {}
+  - role: student
+    permission:
+      columns:
+      - contest_name
+      - contest_type
+      - description
+      - end_date
+      - start_date
+      - status
+      filter: {}
+      check: {}
   delete_permissions:
   - role: counselor
     permission:
