@@ -682,7 +682,6 @@
       - end_date
       - id
       - start_date
-      - status
       backend_only: false
   - role: root
     permission:
@@ -694,7 +693,6 @@
       - end_date
       - id
       - start_date
-      - status
       backend_only: false
   select_permissions:
   - role: counselor
@@ -706,7 +704,6 @@
       - end_date
       - id
       - start_date
-      - status
       filter: {}
   - role: root
     permission:
@@ -717,7 +714,6 @@
       - end_date
       - id
       - start_date
-      - status
       filter: {}
   - role: student
     permission:
@@ -728,7 +724,6 @@
       - end_date
       - id
       - start_date
-      - status
       filter: {}
   update_permissions:
   - role: counselor
@@ -739,7 +734,6 @@
       - description
       - end_date
       - start_date
-      - status
       filter: {}
       check: {}
   - role: root
@@ -750,7 +744,6 @@
       - description
       - end_date
       - start_date
-      - status
       filter: {}
       check: {}
   delete_permissions:
@@ -1138,13 +1131,6 @@
       - room_id
       - contest_id
       filter: {}
-  delete_permissions:
-  - role: counselor
-    permission:
-      filter: {}
-  - role: student
-    permission:
-      filter: {}
 - table:
     schema: public
     name: contest_room_team
@@ -1182,13 +1168,6 @@
       columns:
       - team_id
       - room_id
-      filter: {}
-  delete_permissions:
-  - role: counselor
-    permission:
-      filter: {}
-  - role: student
-    permission:
       filter: {}
 - table:
     schema: public
