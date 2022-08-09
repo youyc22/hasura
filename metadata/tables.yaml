@@ -37,20 +37,6 @@
           - form_url
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - amount
-          - aid
-          - code
-          - form_url
-          - status
-          - student_id
-          - thank_letter
-          - created_at
-          - updated_at
-          - id
-        filter: {}
     - role: EEsenior
       permission:
         columns:
@@ -67,6 +53,20 @@
         filter:
           student_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        columns:
+          - amount
+          - aid
+          - code
+          - form_url
+          - status
+          - student_id
+          - thank_letter
+          - created_at
+          - updated_at
+          - id
+        filter: {}
     - role: root
       permission:
         columns:
@@ -173,6 +173,21 @@
             schema: public
             name: comment
   select_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - abstract
+          - alias
+          - authorId
+          - content
+          - created_at
+          - id
+          - title
+          - updated_at
+          - views
+          - visible
+        filter: {}
+        allow_aggregations: true
     - role: anonymous
       permission:
         columns:
@@ -204,21 +219,6 @@
           _and:
             - visible:
                 _eq: true
-        allow_aggregations: true
-    - role: EEsenior
-      permission:
-        columns:
-          - abstract
-          - alias
-          - authorId
-          - content
-          - created_at
-          - id
-          - title
-          - updated_at
-          - views
-          - visible
-        filter: {}
         allow_aggregations: true
     - role: root
       permission:
@@ -378,6 +378,7 @@
           remote_table:
             schema: public
             name: user
+          insertion_order: null
           column_mapping:
             authorId: _id
   array_relationships:
@@ -387,6 +388,7 @@
           remote_table:
             schema: public
             name: article_liker
+          insertion_order: null
           column_mapping:
             id: article_id
     - name: article_tags
@@ -395,6 +397,7 @@
           remote_table:
             schema: public
             name: article_tag
+          insertion_order: null
           column_mapping:
             id: article_id
     - name: comments
@@ -403,6 +406,7 @@
           remote_table:
             schema: public
             name: comment
+          insertion_order: null
           column_mapping:
             id: article_id
   select_permissions:
@@ -591,6 +595,13 @@
           - tag_id
         backend_only: false
   select_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - article_id
+          - tag_id
+        filter: {}
+        allow_aggregations: true
     - role: anonymous
       permission:
         columns:
@@ -599,13 +610,6 @@
         filter: {}
         allow_aggregations: true
     - role: counselor
-      permission:
-        columns:
-          - article_id
-          - tag_id
-        filter: {}
-        allow_aggregations: true
-    - role: EEsenior
       permission:
         columns:
           - article_id
@@ -1220,6 +1224,19 @@
             schema: public
             name: contest_team_member
   insert_permissions:
+    - role: EEsenior
+      permission:
+        check: {}
+        columns:
+          - created_at
+          - invited_code
+          - member_num
+          - team_id
+          - team_intro
+          - team_leader
+          - team_name
+          - updated_at
+        backend_only: false
     - role: counselor
       permission:
         check: {}
@@ -1233,19 +1250,6 @@
           - status2
           - contest_score
           - submitted_code_num
-          - team_id
-          - team_intro
-          - team_leader
-          - team_name
-          - updated_at
-        backend_only: false
-    - role: EEsenior
-      permission:
-        check: {}
-        columns:
-          - created_at
-          - invited_code
-          - member_num
           - team_id
           - team_intro
           - team_leader
@@ -1287,24 +1291,6 @@
           - updated_at
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - submitted_code_num
-          - invited_code
-          - score
-          - status
-          - status2
-          - contest_score
-          - team_intro
-          - team_leader
-          - team_name
-          - created_at
-          - updated_at
-          - contest_id
-          - team_id
-          - member_num
-        filter: {}
     - role: EEsenior
       permission:
         columns:
@@ -1322,6 +1308,24 @@
           - team_leader
           - team_name
           - updated_at
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - submitted_code_num
+          - invited_code
+          - score
+          - status
+          - status2
+          - contest_score
+          - team_intro
+          - team_leader
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - member_num
         filter: {}
     - role: root
       permission:
@@ -1360,6 +1364,19 @@
           - updated_at
         filter: {}
   update_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - created_at
+          - invited_code
+          - member_num
+          - team_id
+          - team_intro
+          - team_leader
+          - team_name
+          - updated_at
+        filter: {}
+        check: null
     - role: counselor
       permission:
         columns:
@@ -1371,19 +1388,6 @@
           - status2
           - contest_score
           - submitted_code_num
-          - team_id
-          - team_intro
-          - team_leader
-          - team_name
-          - updated_at
-        filter: {}
-        check: null
-    - role: EEsenior
-      permission:
-        columns:
-          - created_at
-          - invited_code
-          - member_num
           - team_id
           - team_intro
           - team_leader
@@ -1420,10 +1424,10 @@
         filter: {}
         check: null
   delete_permissions:
-    - role: counselor
+    - role: EEsenior
       permission:
         filter: {}
-    - role: EEsenior
+    - role: counselor
       permission:
         filter: {}
     - role: root
@@ -1567,18 +1571,6 @@
           - student_id
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - id
-          - created_at
-          - updated_at
-          - student_id
-          - statement
-          - attachment_url
-          - honor
-          - status
-        filter: {}
     - role: EEsenior
       permission:
         columns:
@@ -1593,6 +1585,18 @@
         filter:
           student_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - student_id
+          - statement
+          - attachment_url
+          - honor
+          - status
+        filter: {}
     - role: root
       permission:
         columns:
@@ -1621,12 +1625,6 @@
           student_id:
             _eq: X-Hasura-User-Id
   update_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - status
-        filter: {}
-        check: {}
     - role: EEsenior
       permission:
         columns:
@@ -1647,6 +1645,12 @@
                 _eq: X-Hasura-User-Id
             - updated_at:
                 _lt: "2021-10-06T09:00:00+00:00"
+    - role: counselor
+      permission:
+        columns:
+          - status
+        filter: {}
+        check: {}
     - role: root
       permission:
         columns:
@@ -1729,7 +1733,7 @@
           - updated_at
         backend_only: false
   select_permissions:
-    - role: counselor
+    - role: EEsenior
       permission:
         columns:
           - content
@@ -1740,7 +1744,7 @@
           - title
           - updated_at
         filter: {}
-    - role: EEsenior
+    - role: counselor
       permission:
         columns:
           - content
@@ -2261,6 +2265,7 @@
           remote_table:
             schema: public
             name: postgraduate_application_history
+          insertion_order: null
           column_mapping:
             mentor_info_id: mentor_info_id
             user_id: user_id
@@ -2290,17 +2295,6 @@
           - verified
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - user_id
-          - mentor_info_id
-          - status
-          - created_at
-          - updated_at
-          - verified
-        filter: {}
-        allow_aggregations: true
     - role: EEsenior
       permission:
         columns:
@@ -2309,6 +2303,17 @@
           - status
           - updated_at
           - user_id
+          - verified
+        filter: {}
+        allow_aggregations: true
+    - role: counselor
+      permission:
+        columns:
+          - user_id
+          - mentor_info_id
+          - status
+          - created_at
+          - updated_at
           - verified
         filter: {}
         allow_aggregations: true
@@ -2335,17 +2340,6 @@
         filter: {}
         allow_aggregations: true
   update_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - verified
-          - mentor_info_id
-          - user_id
-          - created_at
-          - updated_at
-          - status
-        filter: {}
-        check: null
     - role: EEsenior
       permission:
         columns:
@@ -2358,6 +2352,17 @@
         filter:
           user_id:
             _eq: X-Hasura-User-Id
+        check: null
+    - role: counselor
+      permission:
+        columns:
+          - verified
+          - mentor_info_id
+          - user_id
+          - created_at
+          - updated_at
+          - status
+        filter: {}
         check: null
     - role: root
       permission:
@@ -2382,14 +2387,14 @@
         filter: {}
         check: null
   delete_permissions:
-    - role: counselor
-      permission:
-        filter: {}
     - role: EEsenior
       permission:
         filter:
           user_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        filter: {}
     - role: root
       permission:
         filter: {}
@@ -2407,16 +2412,6 @@
       using:
         foreign_key_constraint_on: user_id
   insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - mentor_info_id
-          - user_id
-          - created_at
-          - updated_at
-          - status
-        backend_only: false
     - role: EEsenior
       permission:
         check:
@@ -2425,6 +2420,16 @@
         columns:
           - user_id
           - mentor_info_id
+          - created_at
+          - updated_at
+          - status
+        backend_only: false
+    - role: counselor
+      permission:
+        check: {}
+        columns:
+          - mentor_info_id
+          - user_id
           - created_at
           - updated_at
           - status
@@ -2450,16 +2455,6 @@
           - status
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - mentor_info_id
-          - user_id
-          - created_at
-          - updated_at
-          - status
-        filter: {}
-        allow_aggregations: true
     - role: EEsenior
       permission:
         columns:
@@ -2471,6 +2466,16 @@
         filter:
           user_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        columns:
+          - mentor_info_id
+          - user_id
+          - created_at
+          - updated_at
+          - status
+        filter: {}
+        allow_aggregations: true
     - role: root
       permission:
         columns:
@@ -2492,16 +2497,6 @@
         filter: {}
         allow_aggregations: true
   update_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - mentor_info_id
-          - user_id
-          - created_at
-          - updated_at
-          - status
-        filter: {}
-        check: null
     - role: EEsenior
       permission:
         columns:
@@ -2516,6 +2511,16 @@
         check:
           user_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        columns:
+          - mentor_info_id
+          - user_id
+          - created_at
+          - updated_at
+          - status
+        filter: {}
+        check: null
     - role: root
       permission:
         columns:
@@ -2626,25 +2631,6 @@
           - phd_quota_unfixed
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - verified
-          - id
-          - alternate_contact
-          - contact
-          - detail_info
-          - field
-          - home_page
-          - mentor
-          - created_at
-          - updated_at
-          - editor
-          - user_id
-          - phd_quota
-          - phd_quota_unfixed
-        filter: {}
-        allow_aggregations: true
     - role: EEsenior
       permission:
         columns:
@@ -2662,6 +2648,25 @@
           - updated_at
           - user_id
           - verified
+        filter: {}
+        allow_aggregations: true
+    - role: counselor
+      permission:
+        columns:
+          - verified
+          - id
+          - alternate_contact
+          - contact
+          - detail_info
+          - field
+          - home_page
+          - mentor
+          - created_at
+          - updated_at
+          - editor
+          - user_id
+          - phd_quota
+          - phd_quota_unfixed
         filter: {}
         allow_aggregations: true
     - role: root
@@ -2979,21 +2984,6 @@
           - form_url
         backend_only: false
   select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - amount
-          - code
-          - form_url
-          - honor
-          - scholarship
-          - status
-          - student_id
-          - thank_letter
-          - created_at
-          - updated_at
-          - id
-        filter: {}
     - role: EEsenior
       permission:
         columns:
@@ -3011,6 +3001,21 @@
         filter:
           student_id:
             _eq: X-Hasura-User-Id
+    - role: counselor
+      permission:
+        columns:
+          - amount
+          - code
+          - form_url
+          - honor
+          - scholarship
+          - status
+          - student_id
+          - thank_letter
+          - created_at
+          - updated_at
+          - id
+        filter: {}
     - role: root
       permission:
         columns:
@@ -3148,6 +3153,7 @@
           remote_table:
             schema: public
             name: mentor_available
+          insertion_order: null
           column_mapping:
             _id: mentor_id
   array_relationships:
@@ -3210,6 +3216,21 @@
           - username
         backend_only: false
   select_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - _id
+          - class
+          - created_at
+          - department
+          - email
+          - id
+          - name
+          - phone
+          - updated_at
+          - username
+        filter: {}
+        allow_aggregations: true
     - role: anonymous
       permission:
         columns:
@@ -3229,21 +3250,6 @@
           - id
           - _id
           - email
-        filter: {}
-        allow_aggregations: true
-    - role: EEsenior
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
         filter: {}
         allow_aggregations: true
     - role: root
@@ -3306,6 +3312,21 @@
           _id:
             _eq: X-Hasura-User-Id
   update_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - class
+          - department
+          - email
+          - id
+          - name
+          - phone
+          - updated_at
+          - username
+        filter:
+          _id:
+            _eq: X-Hasura-User-Id
+        check: null
     - role: counselor
       permission:
         columns:
@@ -3322,21 +3343,6 @@
         check:
           _id:
             _eq: X-Hasura-User-Id
-    - role: EEsenior
-      permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-        check: null
     - role: root
       permission:
         columns:

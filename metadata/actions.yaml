@@ -20,6 +20,7 @@ custom_types:
             schema: public
             name: user
           name: user
+          source: default
           type: object
           field_mapping:
             _id: _id
