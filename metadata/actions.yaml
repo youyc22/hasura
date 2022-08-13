@@ -16,12 +16,12 @@ custom_types:
   objects:
     - name: user_by_role_user
       relationships:
-        - remote_table:
-            schema: public
-            name: user
+        - field_mapping:
+            _id: _id
           name: user
+          remote_table:
+            name: user
+            schema: public
           source: default
           type: object
-          field_mapping:
-            _id: _id
   scalars: []
