@@ -1,6 +1,6 @@
 - table:
-    schema: public
     name: aid_application
+    schema: public
   object_relationships:
     - name: student
       using:
@@ -20,7 +20,6 @@
           - thank_letter
           - code
           - form_url
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -35,7 +34,6 @@
           - thank_letter
           - code
           - form_url
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -139,13 +137,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: article
+    schema: public
   object_relationships:
     - name: author
       using:
@@ -156,22 +156,22 @@
         foreign_key_constraint_on:
           column: article_id
           table:
-            schema: public
             name: article_liker
+            schema: public
     - name: article_tags
       using:
         foreign_key_constraint_on:
           column: article_id
           table:
-            schema: public
             name: article_tag
+            schema: public
     - name: comments
       using:
         foreign_key_constraint_on:
           column: article_id
           table:
-            schema: public
             name: comment
+            schema: public
   select_permissions:
     - role: EEsenior
       permission:
@@ -305,8 +305,8 @@
         filter: {}
         check: {}
 - table:
-    schema: public
     name: article_liker
+    schema: public
   object_relationships:
     - name: article
       using:
@@ -324,7 +324,6 @@
           user_id: x-hasura-User-Id
         columns:
           - article_id
-        backend_only: false
   select_permissions:
     - role: anonymous
       permission:
@@ -369,46 +368,46 @@
         filter: {}
         allow_aggregations: true
 - table:
-    schema: public
     name: article_public
+    schema: public
   object_relationships:
     - name: author
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: user
-          insertion_order: null
           column_mapping:
             authorId: _id
+          insertion_order: null
+          remote_table:
+            name: user
+            schema: public
   array_relationships:
     - name: article_likers
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: article_liker
-          insertion_order: null
           column_mapping:
             id: article_id
+          insertion_order: null
+          remote_table:
+            name: article_liker
+            schema: public
     - name: article_tags
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: article_tag
-          insertion_order: null
           column_mapping:
             id: article_id
+          insertion_order: null
+          remote_table:
+            name: article_tag
+            schema: public
     - name: comments
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: comment
-          insertion_order: null
           column_mapping:
             id: article_id
+          insertion_order: null
+          remote_table:
+            name: comment
+            schema: public
   select_permissions:
     - role: anonymous
       permission:
@@ -561,8 +560,8 @@
           visible:
             _eq: true
 - table:
-    schema: public
     name: article_tag
+    schema: public
   object_relationships:
     - name: article
       using:
@@ -583,7 +582,6 @@
         columns:
           - article_id
           - tag_id
-        backend_only: false
     - role: student
       permission:
         check:
@@ -593,7 +591,6 @@
         columns:
           - article_id
           - tag_id
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -645,8 +642,8 @@
         filter: {}
         allow_aggregations: true
 - table:
-    schema: public
     name: comment
+    schema: public
   object_relationships:
     - name: article
       using:
@@ -673,8 +670,8 @@
           - id
         filter: {}
 - table:
-    schema: public
     name: contest
+    schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -687,7 +684,6 @@
           - id
           - start_date
           - status
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -699,7 +695,6 @@
           - id
           - start_date
           - status
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -771,13 +766,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_code
+    schema: public
   object_relationships:
     - name: code_contest_id
       using:
@@ -806,7 +803,6 @@
           - code4_update_time
           - code5_update_time
           - code6_update_time
-        backend_only: false
     - role: student
       permission:
         check: {}
@@ -827,7 +823,6 @@
           - code4_update_time
           - code5_update_time
           - code6_update_time
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -913,8 +908,8 @@
         filter: {}
         check: null
 - table:
-    schema: public
     name: contest_info
+    schema: public
   object_relationships:
     - name: contest_id_info
       using:
@@ -928,7 +923,6 @@
           - contest_id
           - files
           - title
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -940,7 +934,6 @@
           - id
           - title
           - updated_at
-        backend_only: false
     - role: student
       permission:
         check: {}
@@ -949,7 +942,6 @@
           - contest_id
           - files
           - title
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1029,16 +1021,19 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_manager
+    schema: public
   object_relationships:
     - name: contest
       using:
@@ -1053,14 +1048,12 @@
         columns:
           - user_id
           - contest_id
-        backend_only: false
     - role: root
       permission:
         check: {}
         columns:
           - user_id
           - contest_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1098,21 +1091,23 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_room
+    schema: public
   array_relationships:
     - name: contest_room_teams
       using:
         foreign_key_constraint_on:
           column: room_id
           table:
-            schema: public
             name: contest_room_team
+            schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -1123,7 +1118,6 @@
           - created_at
           - room_id
           - contest_id
-        backend_only: false
     - role: student
       permission:
         check: {}
@@ -1133,7 +1127,6 @@
           - created_at
           - room_id
           - contest_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1156,13 +1149,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_room_team
+    schema: public
   object_relationships:
     - name: contest_room
       using:
@@ -1177,14 +1172,12 @@
         columns:
           - room_id
           - team_id
-        backend_only: false
     - role: student
       permission:
         check: {}
         columns:
           - room_id
           - team_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1201,13 +1194,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_team
+    schema: public
   object_relationships:
     - name: team_contest_id
       using:
@@ -1221,8 +1216,8 @@
         foreign_key_constraint_on:
           column: team_id
           table:
-            schema: public
             name: contest_team_member
+            schema: public
   insert_permissions:
     - role: EEsenior
       permission:
@@ -1236,7 +1231,6 @@
           - team_leader
           - team_name
           - updated_at
-        backend_only: false
     - role: counselor
       permission:
         check: {}
@@ -1255,7 +1249,6 @@
           - team_leader
           - team_name
           - updated_at
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -1274,7 +1267,6 @@
           - contest_id
           - team_id
           - member_num
-        backend_only: false
     - role: student
       permission:
         check: {}
@@ -1289,7 +1281,6 @@
           - team_leader
           - team_name
           - updated_at
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -1426,19 +1417,23 @@
   delete_permissions:
     - role: EEsenior
       permission:
+        backend_only: false
         filter: {}
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: contest_team_member
+    schema: public
   object_relationships:
     - name: team_as_contest_team_member
       using:
@@ -1453,21 +1448,18 @@
         columns:
           - team_id
           - user_id
-        backend_only: false
     - role: root
       permission:
         check: {}
         columns:
           - user_id
           - team_id
-        backend_only: false
     - role: student
       permission:
         check: {}
         columns:
           - team_id
           - user_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1512,16 +1504,19 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: honor_application
+    schema: public
   object_relationships:
     - name: student
       using:
@@ -1541,7 +1536,6 @@
           - statement
           - status
           - student_id
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -1554,7 +1548,6 @@
           - attachment_url
           - honor
           - status
-        backend_only: false
     - role: student
       permission:
         check:
@@ -1569,7 +1562,6 @@
           - statement
           - status
           - student_id
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -1687,6 +1679,7 @@
   delete_permissions:
     - role: EEsenior
       permission:
+        backend_only: false
         filter:
           _and:
             - student_id:
@@ -1695,9 +1688,11 @@
                 _lt: "2021-10-06T09:00:00+00:00"
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter:
           _and:
             - student_id:
@@ -1705,8 +1700,8 @@
             - created_at:
                 _lt: "2021-10-06T09:00:00+00:00"
 - table:
-    schema: public
     name: info_notice
+    schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -1719,7 +1714,6 @@
           - notice_type
           - title
           - updated_at
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -1731,7 +1725,6 @@
           - notice_type
           - title
           - updated_at
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -1814,13 +1807,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: mentor_application
+    schema: public
   object_relationships:
     - name: mentor
       using:
@@ -1840,7 +1835,6 @@
           - created_at
           - updated_at
           - id
-        backend_only: false
     - role: student
       permission:
         check:
@@ -1850,7 +1844,6 @@
           - mentor_id
           - statement
           - student_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -1936,9 +1929,11 @@
   delete_permissions:
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: student
       permission:
+        backend_only: false
         filter:
           student_id:
             _eq: X-Hasura-User-Id
@@ -1958,16 +1953,16 @@
             - id
             - status
       retry_conf:
-        num_retries: 0
         interval_sec: 10
+        num_retries: 0
         timeout_sec: 60
       webhook: https://api.eesast.com/emails/events
       headers:
         - name: x-hasura-action-secret
           value_from_env: ACTION_SECRET
 - table:
-    schema: public
     name: mentor_available
+    schema: public
   insert_permissions:
     - role: root
       permission:
@@ -1977,7 +1972,6 @@
           - mentor_id
           - created_at
           - updated_at
-        backend_only: false
     - role: teacher
       permission:
         check:
@@ -1986,7 +1980,6 @@
         columns:
           - available
           - mentor_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -2045,10 +2038,11 @@
   delete_permissions:
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: mentor_info
+    schema: public
   object_relationships:
     - name: user
       using:
@@ -2065,7 +2059,6 @@
           - background
           - field
           - intro
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2077,7 +2070,6 @@
           - background
           - field
           - intro
-        backend_only: false
     - role: teacher
       permission:
         check:
@@ -2091,7 +2083,6 @@
           - achievement
           - created_at
           - updated_at
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -2182,13 +2173,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: mentor_message
+    schema: public
   object_relationships:
     - name: from_user
       using:
@@ -2206,7 +2199,6 @@
           - from_id
           - payload
           - to_id
-        backend_only: false
     - role: teacher
       permission:
         check:
@@ -2216,7 +2208,6 @@
           - from_id
           - payload
           - to_id
-        backend_only: false
   select_permissions:
     - role: student
       permission:
@@ -2249,8 +2240,8 @@
             - to_id:
                 _eq: X-Hasura-User-Id
 - table:
-    schema: public
     name: postgraduate_application
+    schema: public
   object_relationships:
     - name: mentor
       using:
@@ -2262,13 +2253,13 @@
     - name: history
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: postgraduate_application_history
-          insertion_order: null
           column_mapping:
             mentor_info_id: mentor_info_id
             user_id: user_id
+          insertion_order: null
+          remote_table:
+            name: postgraduate_application_history
+            schema: public
   insert_permissions:
     - role: EEsenior
       permission:
@@ -2282,7 +2273,6 @@
           - updated_at
           - user_id
           - verified
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2293,7 +2283,6 @@
           - updated_at
           - user_id
           - verified
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -2389,21 +2378,25 @@
   delete_permissions:
     - role: EEsenior
       permission:
+        backend_only: false
         filter:
           user_id:
             _eq: X-Hasura-User-Id
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: teacher
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: postgraduate_application_history
+    schema: public
   object_relationships:
     - name: mentor
       using:
@@ -2423,7 +2416,6 @@
           - created_at
           - updated_at
           - status
-        backend_only: false
     - role: counselor
       permission:
         check: {}
@@ -2433,7 +2425,6 @@
           - created_at
           - updated_at
           - status
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2443,7 +2434,6 @@
           - created_at
           - updated_at
           - status
-        backend_only: false
     - role: teacher
       permission:
         check: {}
@@ -2453,7 +2443,6 @@
           - created_at
           - updated_at
           - status
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -2544,13 +2533,15 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: postgraduate_mentor_info
+    schema: public
   object_relationships:
     - name: user
       using:
@@ -2564,8 +2555,8 @@
         foreign_key_constraint_on:
           column: mentor_info_id
           table:
-            schema: public
             name: postgraduate_application
+            schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -2587,7 +2578,6 @@
           - user_id
           - phd_quota
           - phd_quota_unfixed
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2608,7 +2598,6 @@
           - user_id
           - phd_quota
           - phd_quota_unfixed
-        backend_only: false
     - role: teacher
       permission:
         check: {}
@@ -2629,7 +2618,6 @@
           - user_id
           - phd_quota
           - phd_quota_unfixed
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -2774,18 +2762,21 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: teacher
       permission:
+        backend_only: false
         filter:
           user_id:
             _eq: X-Hasura-User-Id
 - table:
-    schema: public
     name: postgraduate_mentor_info_pending
+    schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -2802,7 +2793,6 @@
           - user_id
           - created_at
           - updated_at
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2818,7 +2808,6 @@
           - user_id
           - created_at
           - updated_at
-        backend_only: false
     - role: teacher
       permission:
         check: {}
@@ -2834,7 +2823,6 @@
           - alternate_contact
           - detail_info
           - user_id
-        backend_only: false
   select_permissions:
     - role: counselor
       permission:
@@ -2936,16 +2924,19 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
     - role: teacher
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: scholarship_application
+    schema: public
   object_relationships:
     - name: student
       using:
@@ -2966,7 +2957,6 @@
           - code
           - honor
           - form_url
-        backend_only: false
     - role: root
       permission:
         check: {}
@@ -2982,7 +2972,6 @@
           - code
           - honor
           - form_url
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -3091,21 +3080,23 @@
   delete_permissions:
     - role: counselor
       permission:
+        backend_only: false
         filter: {}
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: tag
+    schema: public
   array_relationships:
     - name: tag_articles
       using:
         foreign_key_constraint_on:
           column: tag_id
           table:
-            schema: public
             name: article_tag
+            schema: public
   select_permissions:
     - role: anonymous
       permission:
@@ -3144,61 +3135,61 @@
         filter: {}
         allow_aggregations: true
 - table:
-    schema: public
     name: user
+    schema: public
   object_relationships:
     - name: mentor_available
       using:
         manual_configuration:
-          remote_table:
-            schema: public
-            name: mentor_available
-          insertion_order: null
           column_mapping:
             _id: mentor_id
+          insertion_order: null
+          remote_table:
+            name: mentor_available
+            schema: public
   array_relationships:
     - name: articles
       using:
         foreign_key_constraint_on:
           column: authorId
           table:
-            schema: public
             name: article
+            schema: public
     - name: comments
       using:
         foreign_key_constraint_on:
           column: user_id
           table:
-            schema: public
             name: comment
+            schema: public
     - name: like_articles
       using:
         foreign_key_constraint_on:
           column: user_id
           table:
-            schema: public
             name: article_liker
+            schema: public
     - name: mentor_applications_mentor
       using:
         foreign_key_constraint_on:
           column: mentor_id
           table:
-            schema: public
             name: mentor_application
+            schema: public
     - name: mentor_applications_student
       using:
         foreign_key_constraint_on:
           column: student_id
           table:
-            schema: public
             name: mentor_application
+            schema: public
     - name: mentor_info
       using:
         foreign_key_constraint_on:
           column: mentor_id
           table:
-            schema: public
             name: mentor_info
+            schema: public
   insert_permissions:
     - role: root
       permission:
@@ -3214,7 +3205,6 @@
           - phone
           - updated_at
           - username
-        backend_only: false
   select_permissions:
     - role: EEsenior
       permission:
@@ -3406,7 +3396,63 @@
   delete_permissions:
     - role: root
       permission:
+        backend_only: false
         filter: {}
 - table:
-    schema: public
     name: weekly
+    schema: public
+  select_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+        allow_aggregations: true
+    - role: anonymous
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+        allow_aggregations: true
+    - role: root
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+        allow_aggregations: true
+    - role: student
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+        allow_aggregations: true
+    - role: teacher
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
+        allow_aggregations: true
+    - role: user
+      permission:
+        columns:
+          - id
+          - title
+          - url
+        filter: {}
