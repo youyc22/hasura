@@ -3406,6 +3406,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3414,6 +3415,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3421,6 +3423,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3429,6 +3432,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3437,6 +3441,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3445,6 +3450,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
@@ -3453,6 +3459,7 @@
       permission:
         columns:
           - id
+          - tags
           - title
           - url
         filter: {}
