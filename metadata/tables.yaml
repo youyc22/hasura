@@ -1555,7 +1555,7 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - created_at:
-                _lt: "2021-10-06T09:00:00+00:00"
+                _lt: "2022-10-06T09:00:00+00:00"
         columns:
           - attachment_url
           - honor
@@ -1669,13 +1669,8 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - updated_at:
-                _lt: "2021-10-06T09:00:00+00:00"
-        check:
-          _and:
-            - student_id:
-                _eq: X-Hasura-User-Id
-            - updated_at:
-                _lt: "2021-10-06T09:00:00+00:00"
+                _lt: "2022-10-06T09:00:00+00:00"
+        check: {}
   delete_permissions:
     - role: EEsenior
       permission:
@@ -1698,7 +1693,7 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - created_at:
-                _lt: "2021-10-06T09:00:00+00:00"
+                _lt: "2022-10-06T09:00:00+00:00"
 - table:
     name: info_notice
     schema: public
@@ -3086,6 +3081,9 @@
       permission:
         backend_only: false
         filter: {}
+- table:
+    name: scholarships_aids
+    schema: public
 - table:
     name: tag
     schema: public
