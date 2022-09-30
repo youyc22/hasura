@@ -1555,7 +1555,9 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - created_at:
-                _lt: "2022-10-06T09:00:00+00:00"
+                _lt: "2022-10-05T23:59:59+08:00"
+            - created_at:
+                _gt: "2022-10-01T00:00:00+08:00"
         columns:
           - attachment_url
           - honor
@@ -1669,7 +1671,9 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - updated_at:
-                _lt: "2022-10-06T09:00:00+00:00"
+                _lt: "2022-10-05T23:59:59+08:00"
+            - updated_at:
+                _gt: "2022-10-01T00:00:00+08:00"
         check: {}
   delete_permissions:
     - role: EEsenior
@@ -1693,7 +1697,9 @@
             - student_id:
                 _eq: X-Hasura-User-Id
             - created_at:
-                _lt: "2022-10-06T09:00:00+00:00"
+                _lt: "2022-10-05T23:59:59+08:00"
+            - created_at:
+                _gt: "2022-10-01T00:00:00+08:00"
 - table:
     name: info_notice
     schema: public
