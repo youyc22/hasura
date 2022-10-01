@@ -3090,6 +3090,57 @@
 - table:
     name: scholarships_aids
     schema: public
+  select_permissions:
+    - role: EEsenior
+      permission:
+        columns:
+          - IsAids
+          - amount
+          - code
+          - name
+          - salutation
+          - type
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - IsAids
+          - amount
+          - code
+          - name
+          - salutation
+          - type
+        filter: {}
+    - role: root
+      permission:
+        columns:
+          - IsAids
+          - amount
+          - code
+          - name
+          - salutation
+          - type
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - IsAids
+          - amount
+          - code
+          - name
+          - salutation
+          - type
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - IsAids
+          - amount
+          - code
+          - name
+          - salutation
+          - type
+        filter: {}
 - table:
     name: tag
     schema: public
