@@ -1869,6 +1869,7 @@
           - updated_at
           - id
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
