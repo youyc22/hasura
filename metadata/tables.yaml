@@ -3433,27 +3433,35 @@
           _id:
             _eq: X-Hasura-User-Id
         check: null
-    - role: user
+  delete_permissions:
+    - role: EEsenior
       permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - username
+        backend_only: false
         filter:
           _id:
             _eq: X-Hasura-User-Id
-        check:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter:
           _id:
             _eq: X-Hasura-User-Id
-  delete_permissions:
     - role: root
       permission:
         backend_only: false
         filter: {}
+    - role: student
+      permission:
+        backend_only: false
+        filter:
+          _id:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          _id:
+            _eq: X-Hasura-User-Id
 - table:
     name: weekly
     schema: public
