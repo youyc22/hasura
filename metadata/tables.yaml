@@ -823,6 +823,12 @@
           - code4_update_time
           - code5_update_time
           - code6_update_time
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
   select_permissions:
     - role: counselor
       permission:
@@ -853,6 +859,12 @@
           - code4
           - code5
           - code6
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
           - code1_update_time
           - code2_update_time
           - code3_update_time
@@ -895,6 +907,12 @@
           - code4
           - code5
           - code6
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
           - code1_update_time
           - code2_update_time
           - code3_update_time
