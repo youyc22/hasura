@@ -1131,38 +1131,42 @@
       permission:
         check: {}
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
     - role: student
       permission:
         check: {}
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
   select_permissions:
     - role: counselor
       permission:
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
     - role: student
       permission:
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
   delete_permissions:
     - role: counselor
