@@ -1537,6 +1537,9 @@
         backend_only: false
         filter: {}
 - table:
+    name: department
+    schema: public
+- table:
     name: honor_application
     schema: public
   object_relationships:
