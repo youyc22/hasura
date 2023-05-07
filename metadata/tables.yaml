@@ -1537,6 +1537,9 @@
         backend_only: false
         filter: {}
 - table:
+    name: department
+    schema: public
+- table:
     name: honor_application
     schema: public
   object_relationships:
@@ -1992,17 +1995,6 @@
     - name: send_email
       definition:
         enable_manual: true
-        insert:
-          columns: '*'
-        update:
-          columns:
-            - mentor_id
-            - statement
-            - student_id
-            - created_at
-            - updated_at
-            - id
-            - status
       retry_conf:
         interval_sec: 10
         num_retries: 0
