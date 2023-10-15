@@ -823,6 +823,12 @@
           - code4_update_time
           - code5_update_time
           - code6_update_time
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
   select_permissions:
     - role: counselor
       permission:
@@ -853,6 +859,12 @@
           - code4
           - code5
           - code6
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
           - code1_update_time
           - code2_update_time
           - code3_update_time
@@ -895,6 +907,12 @@
           - code4
           - code5
           - code6
+          - code_type1
+          - code_type2
+          - code_type3
+          - code_type4
+          - code_type5
+          - code_type6
           - code1_update_time
           - code2_update_time
           - code3_update_time
@@ -1113,38 +1131,42 @@
       permission:
         check: {}
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
     - role: student
       permission:
         check: {}
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
   select_permissions:
     - role: counselor
       permission:
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
     - role: student
       permission:
         columns:
-          - status
-          - result
-          - created_at
-          - room_id
           - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
   delete_permissions:
     - role: counselor
@@ -1515,6 +1537,9 @@
         backend_only: false
         filter: {}
 - table:
+    name: department
+    schema: public
+- table:
     name: honor_application
     schema: public
   object_relationships:
@@ -1825,17 +1850,30 @@
       using:
         foreign_key_constraint_on: student_id
   insert_permissions:
-    - role: root
+    - role: counselor
       permission:
         check: {}
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
+    - role: root
+      permission:
+        check: {}
+        columns:
+          - chat_status
+          - created_at
           - id
+          - mentor_id
+          - statement
+          - status
+          - student_id
+          - updated_at
     - role: student
       permission:
         check:
@@ -1849,30 +1887,33 @@
     - role: counselor
       permission:
         columns:
-          - id
+          - chat_status
           - created_at
-          - updated_at
-          - statement
+          - id
           - mentor_id
-          - student_id
+          - statement
           - status
+          - student_id
+          - updated_at
         filter: {}
         allow_aggregations: true
     - role: root
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
-          - id
         filter: {}
         allow_aggregations: true
     - role: student
       permission:
         columns:
+          - chat_status
           - created_at
           - id
           - mentor_id
@@ -1885,32 +1926,48 @@
     - role: teacher
       permission:
         columns:
-          - id
+          - chat_status
           - created_at
-          - updated_at
-          - statement
+          - id
           - mentor_id
-          - student_id
+          - statement
           - status
+          - student_id
+          - updated_at
         filter:
           mentor_id:
             _eq: X-Hasura-User-Id
   update_permissions:
-    - role: root
+    - role: counselor
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
+        filter: {}
+        check: {}
+    - role: root
+      permission:
+        columns:
+          - chat_status
+          - created_at
           - id
+          - mentor_id
+          - statement
+          - status
+          - student_id
+          - updated_at
         filter: {}
         check: {}
     - role: student
       permission:
         columns:
+          - chat_status
           - statement
         filter:
           student_id:
@@ -1929,6 +1986,10 @@
           mentor_id:
             _eq: X-Hasura-User-Id
   delete_permissions:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter: {}
     - role: root
       permission:
         backend_only: false
@@ -1943,17 +2004,6 @@
     - name: send_email
       definition:
         enable_manual: true
-        insert:
-          columns: '*'
-        update:
-          columns:
-            - mentor_id
-            - statement
-            - student_id
-            - created_at
-            - updated_at
-            - id
-            - status
       retry_conf:
         interval_sec: 10
         num_retries: 0
@@ -3433,27 +3483,35 @@
           _id:
             _eq: X-Hasura-User-Id
         check: null
-    - role: user
+  delete_permissions:
+    - role: EEsenior
       permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - username
+        backend_only: false
         filter:
           _id:
             _eq: X-Hasura-User-Id
-        check:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter:
           _id:
             _eq: X-Hasura-User-Id
-  delete_permissions:
     - role: root
       permission:
         backend_only: false
         filter: {}
+    - role: student
+      permission:
+        backend_only: false
+        filter:
+          _id:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          _id:
+            _eq: X-Hasura-User-Id
 - table:
     name: weekly
     schema: public
