@@ -1854,6 +1854,17 @@
       permission:
         check: {}
         columns:
+          - mentor_id
+          - statement
+          - student_id
+          - created_at
+          - updated_at
+          - id
+          - status
+    - role: root
+      permission:
+        check: {}
+        columns:
           - chat_status
           - created_at
           - id
@@ -1939,6 +1950,18 @@
             _eq: X-Hasura-User-Id
   update_permissions:
     - role: counselor
+      permission:
+        columns:
+          - mentor_id
+          - statement
+          - student_id
+          - created_at
+          - updated_at
+          - id
+          - status
+        filter: {}
+        check: {}
+    - role: root
       permission:
         columns:
           - chat_status
