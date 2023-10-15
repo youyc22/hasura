@@ -1,4 +1,0 @@
--- Could not auto-generate a down migration.
--- Please write an appropriate down migration for the SQL below:
--- alter table "public"."mentor_application" add column "chat_status" boolean
---  not null default '0';
