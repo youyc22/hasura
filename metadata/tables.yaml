@@ -1865,13 +1865,26 @@
       permission:
         check: {}
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
+    - role: root
+      permission:
+        check: {}
+        columns:
+          - chat_status
+          - created_at
           - id
+          - mentor_id
+          - statement
+          - status
+          - student_id
+          - updated_at
     - role: student
       permission:
         check:
@@ -1885,30 +1898,33 @@
     - role: counselor
       permission:
         columns:
-          - id
+          - chat_status
           - created_at
-          - updated_at
-          - statement
+          - id
           - mentor_id
-          - student_id
+          - statement
           - status
+          - student_id
+          - updated_at
         filter: {}
         allow_aggregations: true
     - role: root
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
-          - id
         filter: {}
         allow_aggregations: true
     - role: student
       permission:
         columns:
+          - chat_status
           - created_at
           - id
           - mentor_id
@@ -1921,13 +1937,14 @@
     - role: teacher
       permission:
         columns:
-          - id
+          - chat_status
           - created_at
-          - updated_at
-          - statement
+          - id
           - mentor_id
-          - student_id
+          - statement
           - status
+          - student_id
+          - updated_at
         filter:
           mentor_id:
             _eq: X-Hasura-User-Id
@@ -1947,18 +1964,33 @@
     - role: root
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
+        filter: {}
+        check: {}
+    - role: root
+      permission:
+        columns:
+          - chat_status
+          - created_at
           - id
+          - mentor_id
+          - statement
+          - status
+          - student_id
+          - updated_at
         filter: {}
         check: {}
     - role: student
       permission:
         columns:
+          - chat_status
           - statement
         filter:
           student_id:
