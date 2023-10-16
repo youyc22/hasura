@@ -97,7 +97,13 @@ CREATE TABLE public.contest_code (
     code3_update_time timestamp with time zone,
     code4_update_time timestamp with time zone,
     code5_update_time timestamp with time zone,
-    code6_update_time timestamp with time zone
+    code6_update_time timestamp with time zone,
+    code_type1 text,
+    code_type2 text,
+    code_type3 text,
+    code_type4 text,
+    code_type5 text,
+    code_type6 text
 );
 CREATE TABLE public.contest_info (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
@@ -119,7 +125,8 @@ CREATE TABLE public.contest_room (
     result text,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     room_id uuid DEFAULT public.gen_random_uuid() NOT NULL,
-    contest_id uuid NOT NULL
+    contest_id uuid NOT NULL,
+    port integer
 );
 CREATE TABLE public.contest_room_team (
     team_id uuid NOT NULL,
@@ -148,6 +155,18 @@ CREATE TABLE public.contest_team_member (
     user_id text NOT NULL
 );
 COMMENT ON TABLE public.contest_team_member IS '队伍、成员映射表';
+CREATE TABLE public.department (
+    id bigint NOT NULL,
+    name text NOT NULL
+);
+COMMENT ON TABLE public.department IS '清华大学所设院系的名称';
+CREATE SEQUENCE public.department_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.department_id_seq OWNED BY public.department.id;
 CREATE TABLE public.honor_application (
     id uuid DEFAULT public.gen_random_uuid() NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -174,7 +193,8 @@ CREATE TABLE public.mentor_application (
     statement text NOT NULL,
     mentor_id text NOT NULL,
     student_id text NOT NULL,
-    status text DEFAULT 'submitted'::text NOT NULL
+    status text DEFAULT 'submitted'::text NOT NULL,
+    chat_status boolean DEFAULT false NOT NULL
 );
 COMMENT ON COLUMN public.mentor_application.status IS 'approved | submitted';
 CREATE TABLE public.mentor_available (
@@ -312,6 +332,7 @@ CREATE TABLE public.weekly (
     tags json
 );
 ALTER TABLE ONLY public.article ALTER COLUMN id SET DEFAULT nextval('public.article_id_seq'::regclass);
+ALTER TABLE ONLY public.department ALTER COLUMN id SET DEFAULT nextval('public.department_id_seq'::regclass);
 ALTER TABLE ONLY public.postgraduate_mentor_info ALTER COLUMN id SET DEFAULT nextval('public.postgraduate_mentor_info_id_seq'::regclass);
 ALTER TABLE ONLY public.aid_application
     ADD CONSTRAINT aid_application_pkey1 PRIMARY KEY (id);
@@ -341,6 +362,8 @@ ALTER TABLE ONLY public.contest_team_member
     ADD CONSTRAINT contest_team_member_pkey PRIMARY KEY (team_id, user_id);
 ALTER TABLE ONLY public.contest_team
     ADD CONSTRAINT contest_team_pkey PRIMARY KEY (team_id);
+ALTER TABLE ONLY public.department
+    ADD CONSTRAINT department_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.honor_application
     ADD CONSTRAINT honor_application_pkey1 PRIMARY KEY (id);
 ALTER TABLE ONLY public.mentor_application
@@ -420,43 +443,43 @@ COMMENT ON TRIGGER set_public_user_updated_at ON public."user" IS 'trigger to se
 ALTER TABLE ONLY public.aid_application
     ADD CONSTRAINT aid_application_student_id_fkey FOREIGN KEY (student_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.article
-    ADD CONSTRAINT "article_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT "article_authorId_fkey" FOREIGN KEY ("authorId") REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.article_liker
-    ADD CONSTRAINT "article_liker_articleId_fkey" FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT article_liker_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.article_liker
-    ADD CONSTRAINT "article_liker_userId_fkey" FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT article_liker_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.article_tag
-    ADD CONSTRAINT "article_tag_articleId_fkey" FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT article_tag_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.article_tag
-    ADD CONSTRAINT "article_tag_tagId_fkey" FOREIGN KEY (tag_id) REFERENCES public.tag(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT article_tag_tag_id_fkey FOREIGN KEY (tag_id) REFERENCES public.tag(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.comment
-    ADD CONSTRAINT comment_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT comment_article_id_fkey FOREIGN KEY (article_id) REFERENCES public.article(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.comment
-    ADD CONSTRAINT comment_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT comment_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_code
-    ADD CONSTRAINT contest_code_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_code_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_code
-    ADD CONSTRAINT contest_code_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_code_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_info
-    ADD CONSTRAINT contest_info_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_info_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_manager
-    ADD CONSTRAINT contest_manager_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_manager_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_manager
-    ADD CONSTRAINT contest_manager_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_manager_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_room
-    ADD CONSTRAINT contest_room_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_room_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_room_team
-    ADD CONSTRAINT contest_room_team_room_id_fkey FOREIGN KEY (room_id) REFERENCES public.contest_room(room_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_room_team_room_id_fkey FOREIGN KEY (room_id) REFERENCES public.contest_room(room_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_room_team
-    ADD CONSTRAINT contest_room_team_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_room_team_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_team
-    ADD CONSTRAINT contest_team_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_team_contest_id_fkey FOREIGN KEY (contest_id) REFERENCES public.contest(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_team_member
-    ADD CONSTRAINT contest_team_member_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_team_member_team_id_fkey FOREIGN KEY (team_id) REFERENCES public.contest_team(team_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_team_member
-    ADD CONSTRAINT contest_team_member_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_team_member_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.contest_team
-    ADD CONSTRAINT contest_team_team_leader_fkey FOREIGN KEY (team_leader) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT contest_team_team_leader_fkey FOREIGN KEY (team_leader) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.honor_application
     ADD CONSTRAINT honor_application_student_id_fkey FOREIGN KEY (student_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mentor_application
@@ -466,26 +489,26 @@ ALTER TABLE ONLY public.mentor_application
 ALTER TABLE ONLY public.mentor_available
     ADD CONSTRAINT mentor_available_mentor_id_fkey FOREIGN KEY (mentor_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mentor_info
-    ADD CONSTRAINT mentor_info_mentor_id_fkey FOREIGN KEY (mentor_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT mentor_info_mentor_id_fkey FOREIGN KEY (mentor_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mentor_message
     ADD CONSTRAINT mentor_message_from_id_fkey FOREIGN KEY (from_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mentor_message
     ADD CONSTRAINT mentor_message_to_id_fkey FOREIGN KEY (to_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_application_history
-    ADD CONSTRAINT postgraduate_application_history_mentor_info_id_fkey FOREIGN KEY (mentor_info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_application_history_mentor_info_id_fkey FOREIGN KEY (mentor_info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_application_history
-    ADD CONSTRAINT postgraduate_application_history_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_application_history_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_application
-    ADD CONSTRAINT postgraduate_application_mentor_info_id_fkey FOREIGN KEY (mentor_info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_application_mentor_info_id_fkey FOREIGN KEY (mentor_info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_application
-    ADD CONSTRAINT postgraduate_application_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_application_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_mentor_info
-    ADD CONSTRAINT postgraduate_mentor_info_editor_fkey FOREIGN KEY (editor) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_mentor_info_editor_fkey FOREIGN KEY (editor) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_mentor_info_pending
-    ADD CONSTRAINT postgraduate_mentor_info_pending_info_id_fkey FOREIGN KEY (info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_mentor_info_pending_info_id_fkey FOREIGN KEY (info_id) REFERENCES public.postgraduate_mentor_info(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_mentor_info_pending
-    ADD CONSTRAINT postgraduate_mentor_info_pending_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_mentor_info_pending_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.postgraduate_mentor_info
-    ADD CONSTRAINT postgraduate_mentor_info_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+    ADD CONSTRAINT postgraduate_mentor_info_user_id_fkey FOREIGN KEY (user_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.scholarship_application
     ADD CONSTRAINT scholarship_application_student_id_fkey FOREIGN KEY (student_id) REFERENCES public."user"(_id) ON UPDATE CASCADE ON DELETE CASCADE;
