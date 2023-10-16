@@ -1854,24 +1854,26 @@
       permission:
         check: {}
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
-          - student_id
-          - created_at
-          - updated_at
-          - id
           - status
+          - student_id
+          - updated_at
     - role: root
       permission:
         check: {}
         columns:
+          - chat_status
           - mentor_id
           - statement
-          - status
           - student_id
           - created_at
           - updated_at
           - id
+          - status
     - role: student
       permission:
         check:
@@ -1935,25 +1937,27 @@
     - role: counselor
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
-          - student_id
-          - created_at
-          - updated_at
-          - id
           - status
+          - student_id
+          - updated_at
         filter: {}
         check: {}
     - role: root
       permission:
         columns:
+          - chat_status
+          - created_at
+          - id
           - mentor_id
           - statement
           - status
           - student_id
-          - created_at
           - updated_at
-          - id
         filter: {}
         check: {}
     - role: student
