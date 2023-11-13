@@ -3193,6 +3193,23 @@
           - type
         filter: {}
 - table:
+    name: share_course
+    schema: public
+  select_permissions:
+    - role: student
+      permission:
+        columns:
+          - year
+          - code
+          - fullname
+          - language
+          - name
+          - professor
+          - semester
+          - type
+          - uuid
+        filter: {}
+- table:
     name: tag
     schema: public
   array_relationships:

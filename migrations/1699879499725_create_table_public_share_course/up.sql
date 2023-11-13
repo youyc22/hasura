@@ -1,0 +1,2 @@
+CREATE TABLE "public"."share_course" ("uuid" uuid NOT NULL DEFAULT gen_random_uuid(), "index" text NOT NULL, "fullname" text NOT NULL, "name" text NOT NULL, "year" integer NOT NULL DEFAULT 2000, "semester" text NOT NULL, "professor" text NOT NULL, "type" Text NOT NULL, "language" text NOT NULL DEFAULT '中文', PRIMARY KEY ("uuid") , UNIQUE ("uuid"));COMMENT ON TABLE "public"."share_course" IS E'所有电子系的课程，用于课程评测';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
