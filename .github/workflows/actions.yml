@@ -35,7 +35,7 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Test Apply changes
+      - name: Test apply
         run: |
           yarn hasura migrate apply --endpoint http://localhost:23333
           yarn hasura metadata apply --endpoint http://localhost:23333
