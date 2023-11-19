@@ -2932,6 +2932,167 @@
           _id:
             _eq: X-Hasura-User-Id
 - table:
+    name: users
+    schema: public
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+    - role: student
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+        check: null
+    - role: student
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+        check: null
+    - role: teacher
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+        check: null
+    - role: user
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter:
+          uuid:
+            _eq: X-Hasura-User-Id
+        check: null
+- table:
     name: weekly
     schema: public
   select_permissions:
