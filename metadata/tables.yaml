@@ -3020,19 +3020,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
-          - id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3041,19 +3034,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
-          - id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3062,19 +3048,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
-          - id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3083,19 +3062,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
-          - id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
