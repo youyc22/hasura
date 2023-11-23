@@ -2943,6 +2943,7 @@
           - department
           - email
           - github_id
+          - id
           - phone
           - realname
           - role
@@ -2951,9 +2952,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: student
       permission:
         columns:
@@ -2962,6 +2961,7 @@
           - department
           - email
           - github_id
+          - id
           - phone
           - realname
           - role
@@ -2970,9 +2970,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: teacher
       permission:
         columns:
@@ -2981,6 +2979,7 @@
           - department
           - email
           - github_id
+          - id
           - phone
           - realname
           - role
@@ -2989,9 +2988,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: user
       permission:
         columns:
@@ -3000,6 +2997,7 @@
           - department
           - email
           - github_id
+          - id
           - phone
           - realname
           - role
@@ -3008,26 +3006,18 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
   update_permissions:
     - role: counselor
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3036,18 +3026,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3056,18 +3040,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
@@ -3076,18 +3054,12 @@
       permission:
         columns:
           - class
-          - created_at
           - department
-          - email
           - github_id
           - phone
           - realname
-          - role
           - student_no
-          - tsinghua_email
-          - updated_at
           - username
-          - uuid
         filter:
           uuid:
             _eq: X-Hasura-User-Id
