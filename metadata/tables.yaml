@@ -2952,9 +2952,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: student
       permission:
         columns:
@@ -2972,9 +2970,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: teacher
       permission:
         columns:
@@ -2992,9 +2988,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
     - role: user
       permission:
         columns:
@@ -3012,9 +3006,7 @@
           - updated_at
           - username
           - uuid
-        filter:
-          uuid:
-            _eq: X-Hasura-User-Id
+        filter: {}
   update_permissions:
     - role: counselor
       permission:
