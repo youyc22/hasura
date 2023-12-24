@@ -1355,22 +1355,30 @@
     - name: mentor
       using:
         foreign_key_constraint_on: mentor_id
+    - name: mentor_byuuid
+      using:
+        foreign_key_constraint_on: mentor_uuid
     - name: student
       using:
         foreign_key_constraint_on: student_id
+    - name: student_byuuid
+      using:
+        foreign_key_constraint_on: student_uuid
   insert_permissions:
     - role: counselor
       permission:
         check: {}
         columns:
-          - chat_status
-          - created_at
           - id
-          - mentor_id
-          - statement
-          - status
-          - student_id
+          - created_at
           - updated_at
+          - statement
+          - mentor_id
+          - student_id
+          - status
+          - chat_status
+          - mentor_uuid
+          - student_uuid
     - role: root
       permission:
         check: {}
@@ -1390,20 +1398,24 @@
             _eq: X-Hasura-User-Id
         columns:
           - mentor_id
+          - mentor_uuid
           - statement
           - student_id
+          - student_uuid
   select_permissions:
     - role: counselor
       permission:
         columns:
           - chat_status
-          - created_at
-          - id
           - mentor_id
           - statement
-          - status
           - student_id
+          - created_at
           - updated_at
+          - id
+          - mentor_uuid
+          - student_uuid
+          - status
         filter: {}
         allow_aggregations: true
     - role: root
@@ -1423,26 +1435,30 @@
       permission:
         columns:
           - chat_status
-          - created_at
-          - id
           - mentor_id
           - statement
-          - status
           - student_id
+          - created_at
           - updated_at
+          - id
+          - mentor_uuid
+          - student_uuid
+          - status
         filter: {}
         allow_aggregations: true
     - role: teacher
       permission:
         columns:
           - chat_status
-          - created_at
-          - id
           - mentor_id
           - statement
-          - status
           - student_id
+          - created_at
           - updated_at
+          - id
+          - mentor_uuid
+          - student_uuid
+          - status
         filter:
           mentor_id:
             _eq: X-Hasura-User-Id
@@ -1451,13 +1467,15 @@
       permission:
         columns:
           - chat_status
-          - created_at
-          - id
           - mentor_id
           - statement
-          - status
           - student_id
+          - created_at
           - updated_at
+          - id
+          - mentor_uuid
+          - student_uuid
+          - status
         filter: {}
         check: {}
     - role: root
@@ -1524,6 +1542,10 @@
 - table:
     name: mentor_available
     schema: public
+  object_relationships:
+    - name: mentor_byuuid
+      using:
+        foreign_key_constraint_on: mentor_uuid
   insert_permissions:
     - role: root
       permission:
@@ -1541,6 +1563,7 @@
         columns:
           - available
           - mentor_id
+          - mentor_uuid
   select_permissions:
     - role: counselor
       permission:
@@ -1549,6 +1572,7 @@
           - updated_at
           - mentor_id
           - available
+          - mentor_uuid
         filter: {}
     - role: root
       permission:
@@ -1562,9 +1586,10 @@
       permission:
         columns:
           - available
-          - created_at
           - mentor_id
+          - created_at
           - updated_at
+          - mentor_uuid
         filter: {}
     - role: teacher
       permission:
@@ -1573,6 +1598,7 @@
           - mentor_id
           - created_at
           - updated_at
+          - mentor_uuid
         filter:
           mentor_id:
             _eq: X-Hasura-User-Id
@@ -1608,18 +1634,22 @@
     - name: user
       using:
         foreign_key_constraint_on: mentor_id
+    - name: userByMentorUuid
+      using:
+        foreign_key_constraint_on: mentor_uuid
   insert_permissions:
     - role: counselor
       permission:
         check: {}
         columns:
           - mentor_id
-          - created_at
-          - updated_at
-          - achievement
+          - intro
           - background
           - field
-          - intro
+          - achievement
+          - created_at
+          - updated_at
+          - mentor_uuid
     - role: root
       permission:
         check: {}
@@ -1637,24 +1667,26 @@
           mentor_id:
             _eq: X-Hasura-User-Id
         columns:
-          - mentor_id
-          - intro
-          - background
-          - field
           - achievement
+          - background
           - created_at
+          - field
+          - intro
+          - mentor_id
+          - mentor_uuid
           - updated_at
   select_permissions:
     - role: counselor
       permission:
         columns:
           - mentor_id
-          - intro
-          - background
-          - field
-          - achievement
           - created_at
           - updated_at
+          - mentor_uuid
+          - achievement
+          - background
+          - field
+          - intro
         filter: {}
         allow_aggregations: true
     - role: root
@@ -1677,17 +1709,19 @@
           - field
           - intro
           - mentor_id
+          - mentor_uuid
         filter: {}
     - role: teacher
       permission:
         columns:
-          - mentor_id
-          - created_at
-          - updated_at
           - achievement
           - background
+          - created_at
           - field
           - intro
+          - mentor_id
+          - mentor_uuid
+          - updated_at
         filter:
           mentor_id:
             _eq: X-Hasura-User-Id
@@ -1698,6 +1732,7 @@
           - mentor_id
           - created_at
           - updated_at
+          - mentor_uuid
           - achievement
           - background
           - field
@@ -1747,9 +1782,15 @@
     - name: from_user
       using:
         foreign_key_constraint_on: from_id
+    - name: from_userbyuuid
+      using:
+        foreign_key_constraint_on: from_uuid
     - name: to_user
       using:
         foreign_key_constraint_on: to_id
+    - name: to_userbyuuid
+      using:
+        foreign_key_constraint_on: to_uuid
   insert_permissions:
     - role: student
       permission:
@@ -1758,8 +1799,10 @@
             _eq: X-Hasura-User-Id
         columns:
           - from_id
+          - from_uuid
           - payload
           - to_id
+          - to_uuid
     - role: teacher
       permission:
         check:
@@ -1767,18 +1810,22 @@
             _eq: X-Hasura-User-Id
         columns:
           - from_id
+          - from_uuid
           - payload
           - to_id
+          - to_uuid
   select_permissions:
     - role: student
       permission:
         columns:
-          - created_at
           - from_id
-          - id
           - payload
           - to_id
+          - created_at
           - updated_at
+          - from_uuid
+          - id
+          - to_uuid
         filter:
           _or:
             - from_id:
@@ -1790,9 +1837,11 @@
         columns:
           - created_at
           - from_id
+          - from_uuid
           - id
           - payload
           - to_id
+          - to_uuid
           - updated_at
         filter:
           _or:
@@ -2502,6 +2551,9 @@
     - name: student
       using:
         foreign_key_constraint_on: student_id
+    - name: student_byuuid
+      using:
+        foreign_key_constraint_on: student_uuid
   insert_permissions:
     - role: counselor
       permission:
@@ -2518,6 +2570,7 @@
           - code
           - honor
           - form_url
+          - student_uuid
     - role: root
       permission:
         check: {}
@@ -2565,6 +2618,7 @@
           - created_at
           - updated_at
           - id
+          - student_uuid
         filter: {}
     - role: root
       permission:
@@ -2585,17 +2639,18 @@
     - role: student
       permission:
         columns:
-          - id
-          - created_at
-          - updated_at
-          - scholarship
           - amount
+          - code
+          - created_at
+          - form_url
+          - honor
+          - id
+          - scholarship
           - status
           - student_id
+          - student_uuid
           - thank_letter
-          - code
-          - honor
-          - form_url
+          - updated_at
         filter:
           student_id:
             _eq: X-Hasura-User-Id
