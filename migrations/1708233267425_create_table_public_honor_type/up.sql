@@ -1,0 +1,1 @@
+CREATE TABLE "public"."honor_type" ("type_id" serial NOT NULL, "type_name" text NOT NULL, PRIMARY KEY ("type_name") , UNIQUE ("type_id"), UNIQUE ("type_name"));COMMENT ON TABLE "public"."honor_type" IS E'荣誉类别';
