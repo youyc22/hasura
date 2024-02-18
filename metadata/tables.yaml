@@ -1235,6 +1235,12 @@
             - created_at:
                 _gt: "2022-10-01T00:00:00+08:00"
 - table:
+    name: honor_time
+    schema: public
+- table:
+    name: honor_type
+    schema: public
+- table:
     name: info_notice
     schema: public
   insert_permissions:
@@ -1849,6 +1855,9 @@
                 _eq: X-Hasura-User-Id
             - to_id:
                 _eq: X-Hasura-User-Id
+- table:
+    name: mentor_time
+    schema: public
 - table:
     name: postgraduate_application
     schema: public
