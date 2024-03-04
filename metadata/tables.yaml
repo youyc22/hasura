@@ -3050,6 +3050,29 @@
 - table:
     name: users
     schema: public
+  object_relationships:
+    - name: mentor_available
+      using:
+        foreign_key_constraint_on:
+          column: mentor_uuid
+          table:
+            name: mentor_available
+            schema: public
+  array_relationships:
+    - name: mentor_application_mentors
+      using:
+        foreign_key_constraint_on:
+          column: mentor_uuid
+          table:
+            name: mentor_application
+            schema: public
+    - name: mentor_application_students
+      using:
+        foreign_key_constraint_on:
+          column: student_uuid
+          table:
+            name: mentor_application
+            schema: public
   select_permissions:
     - role: counselor
       permission:

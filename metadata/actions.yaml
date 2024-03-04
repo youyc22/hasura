@@ -2,7 +2,7 @@ actions:
   - name: user_by_role
     definition:
       kind: ""
-      handler: https://api.eesast.com/users/actions/user_by_role
+      handler: https://api.eesast.com/user/user_by_role
       forward_client_headers: true
       headers:
         - name: x-hasura-action-secret
@@ -26,4 +26,5 @@ custom_types:
             schema: public
           source: default
           type: object
+    - name: user_by_role_users
   scalars: []
