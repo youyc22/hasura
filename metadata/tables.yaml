@@ -3079,14 +3079,21 @@
             name: mentor_available
             schema: public
   array_relationships:
-    - name: mentor_application_mentors
+    - name: contest_team_members
+      using:
+        foreign_key_constraint_on:
+          column: user_uuid
+          table:
+            name: contest_team_member
+            schema: public
+    - name: mentor_application_as_mentor
       using:
         foreign_key_constraint_on:
           column: mentor_uuid
           table:
             name: mentor_application
             schema: public
-    - name: mentor_application_students
+    - name: mentor_application_as_student
       using:
         foreign_key_constraint_on:
           column: student_uuid
