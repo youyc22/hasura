@@ -10,3 +10,9 @@ type user_by_role_user {
   department: String!
 }
 
+type user_by_role_users {
+  uuid: uuid!
+  realname: String!
+  department: String!
+}
+
