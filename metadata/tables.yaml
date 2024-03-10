@@ -2,9 +2,6 @@
     name: aid_application
     schema: public
   object_relationships:
-    - name: student
-      using:
-        foreign_key_constraint_on: student_id
     - name: user
       using:
         foreign_key_constraint_on: student_uuid
@@ -539,9 +536,6 @@
     - name: contest
       using:
         foreign_key_constraint_on: contest_id
-    - name: user
-      using:
-        foreign_key_constraint_on: user_id
     - name: userByUserUuid
       using:
         foreign_key_constraint_on: user_uuid
@@ -725,9 +719,6 @@
     - name: team_leader_byuuid
       using:
         foreign_key_constraint_on: team_leader_uuid
-    - name: team_leader_id
-      using:
-        foreign_key_constraint_on: team_leader
   array_relationships:
     - name: contest_team_members
       using:
@@ -961,9 +952,6 @@
     name: contest_team_member
     schema: public
   object_relationships:
-    - name: _id
-      using:
-        foreign_key_constraint_on: user_id
     - name: team_as_contest_team_member
       using:
         foreign_key_constraint_on: team_id
@@ -1056,10 +1044,7 @@
     name: honor_application
     schema: public
   object_relationships:
-    - name: student
-      using:
-        foreign_key_constraint_on: student_id
-    - name: user
+    - name: student_byuuid
       using:
         foreign_key_constraint_on: student_uuid
   insert_permissions:
@@ -1372,15 +1357,9 @@
     name: mentor_application
     schema: public
   object_relationships:
-    - name: mentor
-      using:
-        foreign_key_constraint_on: mentor_id
     - name: mentor_byuuid
       using:
         foreign_key_constraint_on: mentor_uuid
-    - name: student
-      using:
-        foreign_key_constraint_on: student_id
     - name: student_byuuid
       using:
         foreign_key_constraint_on: student_uuid
@@ -1651,9 +1630,6 @@
     name: mentor_info
     schema: public
   object_relationships:
-    - name: user
-      using:
-        foreign_key_constraint_on: mentor_id
     - name: userByMentorUuid
       using:
         foreign_key_constraint_on: mentor_uuid
@@ -1802,15 +1778,9 @@
     name: mentor_message
     schema: public
   object_relationships:
-    - name: from_user
-      using:
-        foreign_key_constraint_on: from_id
     - name: from_userbyuuid
       using:
         foreign_key_constraint_on: from_uuid
-    - name: to_user
-      using:
-        foreign_key_constraint_on: to_id
     - name: to_userbyuuid
       using:
         foreign_key_constraint_on: to_uuid
@@ -1882,9 +1852,6 @@
     - name: mentor
       using:
         foreign_key_constraint_on: mentor_info_id
-    - name: user
-      using:
-        foreign_key_constraint_on: user_id
   array_relationships:
     - name: history
       using:
@@ -2037,9 +2004,6 @@
     - name: mentor
       using:
         foreign_key_constraint_on: mentor_info_id
-    - name: user
-      using:
-        foreign_key_constraint_on: user_id
   insert_permissions:
     - role: EEsenior
       permission:
@@ -2178,13 +2142,6 @@
 - table:
     name: postgraduate_mentor_info
     schema: public
-  object_relationships:
-    - name: user
-      using:
-        foreign_key_constraint_on: user_id
-    - name: userEditor
-      using:
-        foreign_key_constraint_on: editor
   array_relationships:
     - name: applications
       using:
@@ -2574,9 +2531,6 @@
     name: scholarship_application
     schema: public
   object_relationships:
-    - name: student
-      using:
-        foreign_key_constraint_on: student_id
     - name: student_byuuid
       using:
         foreign_key_constraint_on: student_uuid
@@ -2802,271 +2756,6 @@
           - type
           - uuid
         filter: {}
-- table:
-    name: user
-    schema: public
-  object_relationships:
-    - name: mentor_available
-      using:
-        manual_configuration:
-          column_mapping:
-            _id: mentor_id
-          insertion_order: null
-          remote_table:
-            name: mentor_available
-            schema: public
-  array_relationships:
-    - name: contest_team_members
-      using:
-        foreign_key_constraint_on:
-          column: user_id
-          table:
-            name: contest_team_member
-            schema: public
-    - name: contest_teams
-      using:
-        foreign_key_constraint_on:
-          column: team_leader
-          table:
-            name: contest_team
-            schema: public
-    - name: mentor_applications_mentor
-      using:
-        foreign_key_constraint_on:
-          column: mentor_id
-          table:
-            name: mentor_application
-            schema: public
-    - name: mentor_applications_student
-      using:
-        foreign_key_constraint_on:
-          column: student_id
-          table:
-            name: mentor_application
-            schema: public
-    - name: mentor_info
-      using:
-        foreign_key_constraint_on:
-          column: mentor_id
-          table:
-            name: mentor_info
-            schema: public
-  insert_permissions:
-    - role: root
-      permission:
-        check: {}
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-  select_permissions:
-    - role: EEsenior
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter: {}
-        allow_aggregations: true
-    - role: anonymous
-      permission:
-        columns:
-          - username
-        filter: {}
-        allow_aggregations: true
-    - role: counselor
-      permission:
-        columns:
-          - created_at
-          - updated_at
-          - username
-          - name
-          - department
-          - class
-          - phone
-          - id
-          - _id
-          - email
-        filter: {}
-        allow_aggregations: true
-    - role: root
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter: {}
-    - role: student
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter: {}
-        allow_aggregations: true
-    - role: teacher
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter: {}
-    - role: user
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-  update_permissions:
-    - role: EEsenior
-      permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-        check: null
-    - role: counselor
-      permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-        check:
-          _id:
-            _eq: X-Hasura-User-Id
-    - role: root
-      permission:
-        columns:
-          - _id
-          - class
-          - created_at
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter: {}
-        check: {}
-    - role: student
-      permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - updated_at
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-        check: null
-    - role: teacher
-      permission:
-        columns:
-          - class
-          - department
-          - email
-          - id
-          - name
-          - phone
-          - username
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-        check: null
-  delete_permissions:
-    - role: EEsenior
-      permission:
-        backend_only: false
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-    - role: counselor
-      permission:
-        backend_only: false
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-    - role: root
-      permission:
-        backend_only: false
-        filter: {}
-    - role: student
-      permission:
-        backend_only: false
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
-    - role: teacher
-      permission:
-        backend_only: false
-        filter:
-          _id:
-            _eq: X-Hasura-User-Id
 - table:
     name: users
     schema: public

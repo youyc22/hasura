@@ -1,30 +1,6 @@
-actions:
-  - name: user_by_role
-    definition:
-      kind: ""
-      handler: https://api.eesast.com/user/user_by_role
-      forward_client_headers: true
-      headers:
-        - name: x-hasura-action-secret
-          value_from_env: ACTION_SECRET
-    permissions:
-      - role: teacher
-      - role: root
-      - role: counselor
-      - role: student
+actions: []
 custom_types:
   enums: []
   input_objects: []
-  objects:
-    - name: user_by_role_user
-      relationships:
-        - field_mapping:
-            _id: _id
-          name: user
-          remote_table:
-            name: user
-            schema: public
-          source: default
-          type: object
-    - name: user_by_role_users
+  objects: []
   scalars: []
