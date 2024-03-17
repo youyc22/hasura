@@ -541,12 +541,26 @@
       using:
         foreign_key_constraint_on: team_leader_uuid
   array_relationships:
+    - name: contest_team_codes
+      using:
+        foreign_key_constraint_on:
+          column: team_id
+          table:
+            name: contest_team_code
+            schema: public
     - name: contest_team_members
       using:
         foreign_key_constraint_on:
           column: team_id
           table:
             name: contest_team_member
+            schema: public
+    - name: contest_team_players
+      using:
+        foreign_key_constraint_on:
+          column: team_id
+          table:
+            name: contest_team_player
             schema: public
   insert_permissions:
     - role: counselor
@@ -667,6 +681,153 @@
         backend_only: false
         filter: {}
 - table:
+    name: contest_team_code
+    schema: public
+  insert_permissions:
+    - role: counselor
+      permission:
+        check: {}
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+    - role: student
+      permission:
+        check: {}
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+    - role: teacher
+      permission:
+        check: {}
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+        check: {}
+    - role: student
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+        check: {}
+    - role: teacher
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+        check: {}
+    - role: user
+      permission:
+        columns:
+          - code_id
+          - code_name
+          - compile_status
+          - created_at
+          - language
+          - team_id
+        filter: {}
+        check: {}
+  delete_permissions:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter: {}
+    - role: student
+      permission:
+        backend_only: false
+        filter: {}
+    - role: teacher
+      permission:
+        backend_only: false
+        filter: {}
+    - role: user
+      permission:
+        backend_only: false
+        filter: {}
+- table:
     name: contest_team_member
     schema: public
   object_relationships:
@@ -729,6 +890,121 @@
         backend_only: false
         filter: {}
     - role: student
+      permission:
+        backend_only: false
+        filter: {}
+- table:
+    name: contest_team_player
+    schema: public
+  object_relationships:
+    - name: player_code
+      using:
+        foreign_key_constraint_on: code_id
+  insert_permissions:
+    - role: counselor
+      permission:
+        check: {}
+        columns:
+          - team_id
+          - player
+          - code_id
+    - role: student
+      permission:
+        check: {}
+        columns:
+          - team_id
+          - player
+          - code_id
+    - role: teacher
+      permission:
+        check: {}
+        columns:
+          - team_id
+          - player
+          - code_id
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - team_id
+          - player
+          - code_id
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+        check: {}
+    - role: student
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+        check: {}
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+        check: {}
+    - role: user
+      permission:
+        columns:
+          - team_id
+          - player
+          - code_id
+        filter: {}
+        check: {}
+  delete_permissions:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter: {}
+    - role: student
+      permission:
+        backend_only: false
+        filter: {}
+    - role: teacher
+      permission:
+        backend_only: false
+        filter: {}
+    - role: user
       permission:
         backend_only: false
         filter: {}

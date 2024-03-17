@@ -1,0 +1,2 @@
+CREATE TABLE "public"."contest_team_code" ("team_id" uuid NOT NULL, "code_id" uuid NOT NULL DEFAULT gen_random_uuid(), "code_name" text NOT NULL, "language" text NOT NULL, "compile_status" text NOT NULL, "created_at" timestamptz NOT NULL DEFAULT now(), PRIMARY KEY ("code_id") , UNIQUE ("code_id"));COMMENT ON TABLE "public"."contest_team_code" IS E'记录每个team上传的所有code';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
