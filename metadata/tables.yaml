@@ -1376,7 +1376,7 @@
     name: contest_team_member
     schema: public
   object_relationships:
-    - name: team_as_contest_team_member
+    - name: contest_team
       using:
         foreign_key_constraint_on: team_id
     - name: user
