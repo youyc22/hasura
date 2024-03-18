@@ -1395,13 +1395,33 @@
   insert_permissions:
     - role: counselor
       permission:
-        check: {}
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
         columns:
           - team_id
           - user_uuid
     - role: student
       permission:
-        check: {}
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        columns:
+          - team_id
+          - user_uuid
+    - role: teacher
+      permission:
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        columns:
+          - team_id
+          - user_uuid
+    - role: user
+      permission:
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
         columns:
           - team_id
           - user_uuid
@@ -1418,30 +1438,88 @@
           - team_id
           - user_uuid
         filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter: {}
   update_permissions:
     - role: counselor
       permission:
         columns:
           - team_id
           - user_uuid
-        filter: {}
-        check: null
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
           - team_id
           - user_uuid
-        filter: {}
-        check: null
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
 - table:
     name: contest_team_player
     schema: public
