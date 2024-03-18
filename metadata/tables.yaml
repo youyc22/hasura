@@ -764,27 +764,6 @@
           table:
             name: contest_room_team
             schema: public
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
-          - status
-    - role: student
-      permission:
-        check: {}
-        columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
-          - status
   select_permissions:
     - role: counselor
       permission:
@@ -806,14 +785,25 @@
           - room_id
           - status
         filter: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
+        columns:
+          - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
-    - role: student
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
 - table:
     name: contest_room_team
