@@ -306,21 +306,18 @@
         check: {}
         columns:
           - contest_id
-          - user_id
           - user_uuid
   select_permissions:
     - role: counselor
       permission:
         columns:
           - contest_id
-          - user_id
           - user_uuid
         filter: {}
     - role: student
       permission:
         columns:
           - contest_id
-          - user_id
           - user_uuid
         filter: {}
   update_permissions:
@@ -328,7 +325,6 @@
       permission:
         columns:
           - contest_id
-          - user_id
           - user_uuid
         filter: {}
         check: {}
