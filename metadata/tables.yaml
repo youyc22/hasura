@@ -815,40 +815,38 @@
     - name: contest_team
       using:
         foreign_key_constraint_on: team_id
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - room_id
-          - team_id
-    - role: student
-      permission:
-        check: {}
-        columns:
-          - room_id
-          - team_id
   select_permissions:
     - role: counselor
       permission:
         columns:
+          - score
+          - players
           - room_id
           - team_id
         filter: {}
     - role: student
       permission:
         columns:
-          - team_id
+          - score
+          - players
           - room_id
+          - team_id
         filter: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
+        columns:
+          - score
+          - players
+          - room_id
+          - team_id
         filter: {}
-    - role: student
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - score
+          - players
+          - room_id
+          - team_id
         filter: {}
 - table:
     name: contest_team
@@ -913,9 +911,49 @@
         check: {}
         columns:
           - contest_id
+          - contest_score
           - created_at
           - invited_code
           - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
+          - team_leader_uuid
+          - team_name
+          - updated_at
+    - role: teacher
+      permission:
+        check: {}
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
+          - team_leader_uuid
+          - team_name
+          - updated_at
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
           - submitted_code_num
           - team_id
           - team_intro
@@ -959,10 +997,10 @@
           - team_name
           - updated_at
         filter: {}
-  update_permissions:
-    - role: counselor
+    - role: teacher
       permission:
         columns:
+          - contest_id
           - contest_score
           - created_at
           - invited_code
@@ -977,13 +1015,17 @@
           - team_name
           - updated_at
         filter: {}
-        check: null
-    - role: student
+    - role: user
       permission:
         columns:
+          - contest_id
+          - contest_score
           - created_at
           - invited_code
           - member_num
+          - score
+          - status
+          - status2
           - submitted_code_num
           - team_id
           - team_intro
@@ -991,16 +1033,124 @@
           - team_name
           - updated_at
         filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: null
+    - role: student
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: null
+    - role: teacher
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: null
+    - role: user
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
         check: null
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
 - table:
     name: contest_team_code
     schema: public
