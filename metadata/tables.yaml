@@ -74,6 +74,42 @@
 - table:
     name: contest
     schema: public
+  array_relationships:
+    - name: contest_managers
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_manager
+            schema: public
+    - name: contest_notices
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_notice
+            schema: public
+    - name: contest_players
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_player
+            schema: public
+    - name: contest_rooms
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_room
+            schema: public
+    - name: contest_teams
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_team
+            schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -560,6 +596,13 @@
           column: team_id
           table:
             name: contest_team_player
+            schema: public
+    - name: contest_team_rooms
+      using:
+        foreign_key_constraint_on:
+          column: team_id
+          table:
+            name: contest_room_team
             schema: public
   insert_permissions:
     - role: counselor
