@@ -432,14 +432,13 @@
     - name: userByUserUuid
       using:
         foreign_key_constraint_on: user_uuid
-  insert_permissions:
-    - role: counselor
+  select_permissions:
+    - role: anonymous
       permission:
-        check: {}
         columns:
           - contest_id
           - user_uuid
-  select_permissions:
+        filter: {}
     - role: counselor
       permission:
         columns:
@@ -452,18 +451,17 @@
           - contest_id
           - user_uuid
         filter: {}
-  update_permissions:
-    - role: counselor
+    - role: teacher
       permission:
         columns:
           - contest_id
           - user_uuid
         filter: {}
-        check: {}
-  delete_permissions:
-    - role: counselor
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - contest_id
+          - user_uuid
         filter: {}
 - table:
     name: contest_notice
