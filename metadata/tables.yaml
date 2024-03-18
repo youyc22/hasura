@@ -574,7 +574,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -589,7 +588,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -608,7 +606,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -627,7 +624,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -646,7 +642,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -661,7 +656,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
