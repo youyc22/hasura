@@ -291,7 +291,54 @@
         filter: {}
         check: null
 - table:
-    name: contest_info
+    name: contest_manager
+    schema: public
+  object_relationships:
+    - name: contest
+      using:
+        foreign_key_constraint_on: contest_id
+    - name: userByUserUuid
+      using:
+        foreign_key_constraint_on: user_uuid
+  insert_permissions:
+    - role: counselor
+      permission:
+        check: {}
+        columns:
+          - contest_id
+          - user_id
+          - user_uuid
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - contest_id
+          - user_id
+          - user_uuid
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - contest_id
+          - user_id
+          - user_uuid
+        filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - contest_id
+          - user_id
+          - user_uuid
+        filter: {}
+        check: {}
+  delete_permissions:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter: {}
+- table:
+    name: contest_notice
     schema: public
   object_relationships:
     - name: contest_id_info
@@ -373,53 +420,6 @@
         backend_only: false
         filter: {}
     - role: student
-      permission:
-        backend_only: false
-        filter: {}
-- table:
-    name: contest_manager
-    schema: public
-  object_relationships:
-    - name: contest
-      using:
-        foreign_key_constraint_on: contest_id
-    - name: userByUserUuid
-      using:
-        foreign_key_constraint_on: user_uuid
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - contest_id
-          - user_id
-          - user_uuid
-  select_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - contest_id
-          - user_id
-          - user_uuid
-        filter: {}
-    - role: student
-      permission:
-        columns:
-          - contest_id
-          - user_id
-          - user_uuid
-        filter: {}
-  update_permissions:
-    - role: counselor
-      permission:
-        columns:
-          - contest_id
-          - user_id
-          - user_uuid
-        filter: {}
-        check: {}
-  delete_permissions:
-    - role: counselor
       permission:
         backend_only: false
         filter: {}
