@@ -1,0 +1,1 @@
+CREATE TABLE "public"."contest_time" ("contest_id" uuid NOT NULL, "event" text NOT NULL, "start" timestamptz NOT NULL, "end" timestamptz NOT NULL, "description" text, PRIMARY KEY ("contest_id","event") , FOREIGN KEY ("contest_id") REFERENCES "public"."contest"("id") ON UPDATE restrict ON DELETE cascade);COMMENT ON TABLE "public"."contest_time" IS E'比赛的时间线，仅作展示用';
