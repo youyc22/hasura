@@ -842,10 +842,10 @@
     name: contest_team
     schema: public
   object_relationships:
-    - name: team_contest_id
+    - name: contest
       using:
         foreign_key_constraint_on: contest_id
-    - name: team_leader_byuuid
+    - name: team_leader
       using:
         foreign_key_constraint_on: team_leader_uuid
   array_relationships:
