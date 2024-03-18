@@ -458,6 +458,43 @@
 - table:
     name: contest_player
     schema: public
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
+          - contest_id
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
+          - contest_id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
+          - contest_id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
+          - contest_id
+        filter: {}
 - table:
     name: contest_room
     schema: public
