@@ -420,6 +420,9 @@
         backend_only: false
         filter: {}
 - table:
+    name: contest_player
+    schema: public
+- table:
     name: contest_room
     schema: public
   array_relationships:
