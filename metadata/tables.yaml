@@ -833,28 +833,24 @@
         check: {}
         columns:
           - team_id
-          - user_id
           - user_uuid
     - role: student
       permission:
         check: {}
         columns:
           - team_id
-          - user_id
           - user_uuid
   select_permissions:
     - role: counselor
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
         filter: {}
     - role: student
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
         filter: {}
   update_permissions:
@@ -862,7 +858,6 @@
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
         filter: {}
         check: null
@@ -870,7 +865,6 @@
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
         filter: {}
         check: null
