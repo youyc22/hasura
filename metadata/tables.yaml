@@ -469,14 +469,14 @@
     name: contest_notice
     schema: public
   object_relationships:
-    - name: contest_id_info
+    - name: contest
       using:
         foreign_key_constraint_on: contest_id
   insert_permissions:
     - role: counselor
       permission:
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -491,7 +491,7 @@
     - role: student
       permission:
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -506,7 +506,7 @@
     - role: teacher
       permission:
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -521,7 +521,7 @@
     - role: user
       permission:
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -601,12 +601,12 @@
           - title
           - contest_id
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -621,12 +621,12 @@
           - title
           - contest_id
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -641,12 +641,12 @@
           - title
           - contest_id
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -661,12 +661,12 @@
           - title
           - contest_id
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
         check:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -675,7 +675,7 @@
       permission:
         backend_only: false
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -683,7 +683,7 @@
       permission:
         backend_only: false
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -691,7 +691,7 @@
       permission:
         backend_only: false
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
@@ -699,7 +699,7 @@
       permission:
         backend_only: false
         filter:
-          contest_id_info:
+          contest:
             contest_managers:
               user_uuid:
                 _eq: X-Hasura-User-Id
