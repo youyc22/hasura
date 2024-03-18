@@ -110,69 +110,165 @@
           table:
             name: contest_team
             schema: public
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - contest_name
-          - contest_type
-          - description
-          - end_date
-          - id
-          - start_date
-          - status
   select_permissions:
-    - role: counselor
+    - role: anonymous
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
-          - end_date
-          - id
-          - start_date
+          - name
           - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
         filter: {}
     - role: student
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
-          - end_date
-          - id
-          - start_date
+          - name
           - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
         filter: {}
   update_permissions:
     - role: counselor
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
+          - name
+          - status
           - end_date
           - start_date
-          - status
+          - id
         filter: {}
         check: {}
     - role: student
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
+          - name
+          - status
           - end_date
           - start_date
-          - status
+          - id
         filter: {}
         check: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
         filter: {}
+        check: {}
+    - role: user
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+        check: {}
 - table:
     name: contest_code
     schema: public
