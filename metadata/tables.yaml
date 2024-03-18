@@ -285,9 +285,6 @@
     name: contest_code
     schema: public
   object_relationships:
-    - name: code_contest_id
-      using:
-        foreign_key_constraint_on: contest_id
     - name: code_team_id
       using:
         foreign_key_constraint_on: team_id
