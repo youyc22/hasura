@@ -74,79 +74,216 @@
 - table:
     name: contest
     schema: public
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - contest_name
-          - contest_type
-          - description
-          - end_date
-          - id
-          - start_date
-          - status
+  array_relationships:
+    - name: contest_managers
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_manager
+            schema: public
+    - name: contest_notices
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_notice
+            schema: public
+    - name: contest_players
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_player
+            schema: public
+    - name: contest_rooms
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_room
+            schema: public
+    - name: contest_teams
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_team
+            schema: public
   select_permissions:
-    - role: counselor
+    - role: anonymous
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
-          - end_date
-          - id
-          - start_date
+          - name
           - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
         filter: {}
     - role: student
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
-          - end_date
-          - id
-          - start_date
+          - name
           - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
         filter: {}
   update_permissions:
     - role: counselor
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
+          - name
+          - status
           - end_date
           - start_date
-          - status
-        filter: {}
+          - id
+        filter:
+          contest_managers:
+            user_uuid:
+              _eq: X-Hasura-User-Id
         check: {}
     - role: student
       permission:
         columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
           - contest_name
           - contest_type
           - description
+          - name
+          - status
           - end_date
           - start_date
-          - status
-        filter: {}
+          - id
+        filter:
+          contest_managers:
+            user_uuid:
+              _eq: X-Hasura-User-Id
         check: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
-        filter: {}
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
+        filter:
+          contest_managers:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: {}
+    - role: user
+      permission:
+        columns:
+          - arena_switch
+          - code_upload_switch
+          - playback_switch
+          - playground_switch
+          - stream_switch
+          - contest_name
+          - contest_type
+          - description
+          - name
+          - status
+          - end_date
+          - start_date
+          - id
+        filter:
+          contest_managers:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: {}
 - table:
     name: contest_code
     schema: public
-  object_relationships:
-    - name: code_contest_id
-      using:
-        foreign_key_constraint_on: contest_id
-    - name: code_team_id
-      using:
-        foreign_key_constraint_on: team_id
   insert_permissions:
     - role: counselor
       permission:
@@ -291,30 +428,123 @@
         filter: {}
         check: null
 - table:
-    name: contest_info
+    name: contest_manager
     schema: public
   object_relationships:
-    - name: contest_id_info
+    - name: contest
+      using:
+        foreign_key_constraint_on: contest_id
+  select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - contest_id
+          - user_uuid
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - contest_id
+          - user_uuid
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - contest_id
+          - user_uuid
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - contest_id
+          - user_uuid
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - contest_id
+          - user_uuid
+        filter: {}
+- table:
+    name: contest_notice
+    schema: public
+  object_relationships:
+    - name: contest
       using:
         foreign_key_constraint_on: contest_id
   insert_permissions:
     - role: counselor
       permission:
-        check: {}
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
+          - id
+          - created_at
+          - updated_at
           - content
-          - contest_id
           - files
           - title
+          - contest_id
     - role: student
       permission:
-        check: {}
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
+          - id
+          - created_at
+          - updated_at
           - content
-          - contest_id
           - files
           - title
+          - contest_id
+    - role: teacher
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
+    - role: user
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
+        filter: {}
     - role: counselor
       permission:
         columns:
@@ -348,80 +578,170 @@
           - title
           - contest_id
         filter: {}
+    - role: user
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
+        filter: {}
   update_permissions:
     - role: counselor
       permission:
         columns:
+          - id
+          - created_at
+          - updated_at
           - content
-          - contest_id
           - files
           - title
-        filter: {}
-        check: null
+          - contest_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
+          - id
+          - created_at
+          - updated_at
           - content
-          - contest_id
           - files
           - title
-        filter: {}
-        check: {}
+          - contest_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - id
+          - created_at
+          - updated_at
+          - content
+          - files
+          - title
+          - contest_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
-- table:
-    name: contest_manager
-    schema: public
-  object_relationships:
-    - name: contest
-      using:
-        foreign_key_constraint_on: contest_id
-    - name: userByUserUuid
-      using:
-        foreign_key_constraint_on: user_uuid
-  insert_permissions:
-    - role: counselor
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: teacher
       permission:
-        check: {}
-        columns:
-          - contest_id
-          - user_id
-          - user_uuid
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+- table:
+    name: contest_player
+    schema: public
   select_permissions:
     - role: counselor
       permission:
         columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
           - contest_id
-          - user_id
-          - user_uuid
         filter: {}
     - role: student
       permission:
         columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
           - contest_id
-          - user_id
-          - user_uuid
         filter: {}
-  update_permissions:
-    - role: counselor
+    - role: teacher
       permission:
         columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
           - contest_id
-          - user_id
-          - user_uuid
         filter: {}
-        check: {}
-  delete_permissions:
-    - role: counselor
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - player_num
+          - players_label
+          - roles_available
+          - team_label
+          - contest_id
         filter: {}
 - table:
     name: contest_room
@@ -434,27 +754,6 @@
           table:
             name: contest_room_team
             schema: public
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
-          - status
-    - role: student
-      permission:
-        check: {}
-        columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
-          - status
   select_permissions:
     - role: counselor
       permission:
@@ -476,14 +775,25 @@
           - room_id
           - status
         filter: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
+        columns:
+          - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
-    - role: student
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - contest_id
+          - created_at
+          - port
+          - result
+          - room_id
+          - status
         filter: {}
 - table:
     name: contest_room_team
@@ -495,49 +805,47 @@
     - name: contest_team
       using:
         foreign_key_constraint_on: team_id
-  insert_permissions:
-    - role: counselor
-      permission:
-        check: {}
-        columns:
-          - room_id
-          - team_id
-    - role: student
-      permission:
-        check: {}
-        columns:
-          - room_id
-          - team_id
   select_permissions:
     - role: counselor
       permission:
         columns:
+          - score
+          - players
           - room_id
           - team_id
         filter: {}
     - role: student
       permission:
         columns:
-          - team_id
+          - score
+          - players
           - room_id
+          - team_id
         filter: {}
-  delete_permissions:
-    - role: counselor
+    - role: teacher
       permission:
-        backend_only: false
+        columns:
+          - score
+          - players
+          - room_id
+          - team_id
         filter: {}
-    - role: student
+    - role: user
       permission:
-        backend_only: false
+        columns:
+          - score
+          - players
+          - room_id
+          - team_id
         filter: {}
 - table:
     name: contest_team
     schema: public
   object_relationships:
-    - name: team_contest_id
+    - name: contest
       using:
         foreign_key_constraint_on: contest_id
-    - name: team_leader_byuuid
+    - name: team_leader
       using:
         foreign_key_constraint_on: team_leader_uuid
   array_relationships:
@@ -562,6 +870,13 @@
           table:
             name: contest_team_player
             schema: public
+    - name: contest_team_rooms
+      using:
+        foreign_key_constraint_on:
+          column: team_id
+          table:
+            name: contest_room_team
+            schema: public
   insert_permissions:
     - role: counselor
       permission:
@@ -578,7 +893,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -587,13 +901,52 @@
         check: {}
         columns:
           - contest_id
+          - contest_score
           - created_at
           - invited_code
           - member_num
+          - score
+          - status
+          - status2
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
+          - team_leader_uuid
+          - team_name
+          - updated_at
+    - role: teacher
+      permission:
+        check: {}
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
+          - team_leader_uuid
+          - team_name
+          - updated_at
+    - role: user
+      permission:
+        check: {}
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
           - team_leader_uuid
           - team_name
           - updated_at
@@ -612,7 +965,6 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
@@ -631,15 +983,14 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
         filter: {}
-  update_permissions:
-    - role: counselor
+    - role: teacher
       permission:
         columns:
+          - contest_id
           - contest_score
           - created_at
           - invited_code
@@ -650,43 +1001,161 @@
           - submitted_code_num
           - team_id
           - team_intro
-          - team_leader
           - team_leader_uuid
           - team_name
           - updated_at
         filter: {}
+    - role: user
+      permission:
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
+          - team_leader_uuid
+          - team_name
+          - updated_at
+        filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
         check: null
     - role: student
       permission:
         columns:
-          - created_at
-          - invited_code
-          - member_num
           - submitted_code_num
-          - team_id
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
           - team_intro
-          - team_leader
-          - team_leader_uuid
           - team_name
+          - created_at
           - updated_at
-        filter: {}
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: null
+    - role: teacher
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+        check: null
+    - role: user
+      permission:
+        columns:
+          - submitted_code_num
+          - contest_score
+          - invited_code
+          - score
+          - status
+          - status2
+          - team_intro
+          - team_name
+          - created_at
+          - updated_at
+          - contest_id
+          - team_id
+          - team_leader_uuid
+          - member_num
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
         check: null
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          contest_team_members:
+            user_uuid:
+              _eq: X-Hasura-User-Id
 - table:
     name: contest_team_code
     schema: public
+  object_relationships:
+    - name: contest_team
+      using:
+        foreign_key_constraint_on: team_id
   insert_permissions:
     - role: counselor
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - code_id
           - code_name
@@ -696,7 +1165,11 @@
           - team_id
     - role: student
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - code_id
           - code_name
@@ -706,7 +1179,11 @@
           - team_id
     - role: teacher
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - code_id
           - code_name
@@ -716,7 +1193,11 @@
           - team_id
     - role: user
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - code_id
           - code_name
@@ -734,7 +1215,11 @@
           - created_at
           - language
           - team_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
@@ -744,7 +1229,11 @@
           - created_at
           - language
           - team_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         columns:
@@ -754,7 +1243,11 @@
           - created_at
           - language
           - team_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         columns:
@@ -764,7 +1257,11 @@
           - created_at
           - language
           - team_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
   update_permissions:
     - role: counselor
       permission:
@@ -775,8 +1272,16 @@
           - created_at
           - language
           - team_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
@@ -786,8 +1291,16 @@
           - created_at
           - language
           - team_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         columns:
@@ -797,8 +1310,16 @@
           - created_at
           - language
           - team_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         columns:
@@ -808,25 +1329,49 @@
           - created_at
           - language
           - team_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
 - table:
     name: contest_team_member
     schema: public
@@ -840,31 +1385,59 @@
   insert_permissions:
     - role: counselor
       permission:
-        check: {}
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
         columns:
           - team_id
-          - user_id
           - user_uuid
     - role: student
       permission:
-        check: {}
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
         columns:
           - team_id
-          - user_id
+          - user_uuid
+    - role: teacher
+      permission:
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        columns:
+          - team_id
+          - user_uuid
+    - role: user
+      permission:
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        columns:
+          - team_id
           - user_uuid
   select_permissions:
     - role: counselor
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
         filter: {}
     - role: student
       permission:
         columns:
           - team_id
-          - user_id
+          - user_uuid
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - team_id
           - user_uuid
         filter: {}
   update_permissions:
@@ -872,59 +1445,122 @@
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
-        filter: {}
-        check: null
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
           - team_id
-          - user_id
           - user_uuid
-        filter: {}
-        check: null
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+        check:
+          user_uuid:
+            _eq: X-Hasura-User-Id
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          user_uuid:
+            _eq: X-Hasura-User-Id
 - table:
     name: contest_team_player
     schema: public
   object_relationships:
+    - name: contest_team
+      using:
+        foreign_key_constraint_on: team_id
     - name: player_code
       using:
         foreign_key_constraint_on: code_id
   insert_permissions:
     - role: counselor
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - team_id
           - player
           - code_id
     - role: student
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - team_id
           - player
           - code_id
     - role: teacher
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - team_id
           - player
           - code_id
     - role: user
       permission:
-        check: {}
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
         columns:
           - team_id
           - player
@@ -936,28 +1572,44 @@
           - team_id
           - player
           - code_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
   update_permissions:
     - role: counselor
       permission:
@@ -965,49 +1617,97 @@
           - team_id
           - player
           - code_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         columns:
           - team_id
           - player
           - code_id
-        filter: {}
-        check: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
   delete_permissions:
     - role: counselor
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
-        filter: {}
+        filter:
+          contest_team:
+            contest_team_members:
+              user_uuid:
+                _eq: X-Hasura-User-Id
 - table:
     name: honor_application
     schema: public
