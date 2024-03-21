@@ -4,11 +4,11 @@
     "hasura-cli": "2.36.1"
   },
   "scripts": {
-    "apply": "hasura migrate apply && hasura metadata apply",
     "console": "hasura console",
-    "hasura": "hasura",
-    "migrate-squash": "hasura migrate squash",
-    "status": "hasura migrate status"
+    "status:metadata": "hasura metadata inconsistency status && hasura metadata diff",
+    "status:migration": "hasura migrate status",
+    "squash": "hasura migrate squash",
+    "apply": "hasura migrate apply && hasura metadata apply"
   },
   "private": true
 }
