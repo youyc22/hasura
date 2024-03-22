@@ -758,42 +758,46 @@
     - role: counselor
       permission:
         columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
           - status
+          - result
+          - created_at
+          - room_id
+          - contest_id
+          - port
+          - round_id
         filter: {}
     - role: student
       permission:
         columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
           - status
+          - result
+          - created_at
+          - room_id
+          - contest_id
+          - port
+          - round_id
         filter: {}
     - role: teacher
       permission:
         columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
           - status
+          - result
+          - created_at
+          - room_id
+          - contest_id
+          - port
+          - round_id
         filter: {}
     - role: user
       permission:
         columns:
-          - contest_id
-          - created_at
-          - port
-          - result
-          - room_id
           - status
+          - result
+          - created_at
+          - room_id
+          - contest_id
+          - port
+          - round_id
         filter: {}
 - table:
     name: contest_room_team
