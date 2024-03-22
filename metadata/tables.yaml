@@ -1008,6 +1008,7 @@
           - port
           - round_id
           - map_id
+          - updated_at
         filter: {}
     - role: student
       permission:
@@ -1020,6 +1021,7 @@
           - port
           - round_id
           - map_id
+          - updated_at
         filter: {}
     - role: teacher
       permission:
@@ -1032,6 +1034,7 @@
           - port
           - round_id
           - map_id
+          - updated_at
         filter: {}
     - role: user
       permission:
@@ -1044,6 +1047,7 @@
           - port
           - round_id
           - map_id
+          - updated_at
         filter: {}
 - table:
     name: contest_room_team
