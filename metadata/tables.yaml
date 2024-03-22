@@ -1172,11 +1172,7 @@
           - round_id
           - name
           - maps
-        filter:
-          contest:
-            contest_managers:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+        filter: {}
     - role: student
       permission:
         columns:
@@ -1184,11 +1180,7 @@
           - round_id
           - name
           - maps
-        filter:
-          contest:
-            contest_managers:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+        filter: {}
     - role: teacher
       permission:
         columns:
@@ -1196,11 +1188,7 @@
           - round_id
           - name
           - maps
-        filter:
-          contest:
-            contest_managers:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+        filter: {}
     - role: user
       permission:
         columns:
@@ -1208,11 +1196,7 @@
           - round_id
           - name
           - maps
-        filter:
-          contest:
-            contest_managers:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+        filter: {}
   update_permissions:
     - role: counselor
       permission:
