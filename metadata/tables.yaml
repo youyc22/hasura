@@ -483,6 +483,217 @@
           - user_uuid
         filter: {}
 - table:
+    name: contest_map
+    schema: public
+  object_relationships:
+    - name: contest
+      using:
+        foreign_key_constraint_on: contest_id
+  array_relationships:
+    - name: contest_map_rooms
+      using:
+        foreign_key_constraint_on:
+          column: map_id
+          table:
+            name: contest_room
+            schema: public
+  insert_permissions:
+    - role: counselor
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+    - role: student
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+    - role: teacher
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+    - role: user
+      permission:
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+  select_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter: {}
+  update_permissions:
+    - role: counselor
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: student
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        columns:
+          - filename
+          - name
+          - team_labels
+          - contest_id
+          - map_id
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+        check:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+  delete_permissions:
+    - role: counselor
+      permission:
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: student
+      permission:
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: teacher
+      permission:
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+    - role: user
+      permission:
+        backend_only: false
+        filter:
+          contest:
+            contest_managers:
+              user_uuid:
+                _eq: X-Hasura-User-Id
+- table:
     name: contest_notice
     schema: public
   object_relationships:
@@ -771,6 +982,9 @@
     - name: contest
       using:
         foreign_key_constraint_on: contest_id
+    - name: contest_map
+      using:
+        foreign_key_constraint_on: map_id
     - name: contest_round
       using:
         foreign_key_constraint_on: round_id
@@ -793,6 +1007,7 @@
           - contest_id
           - port
           - round_id
+          - map_id
         filter: {}
     - role: student
       permission:
@@ -804,6 +1019,7 @@
           - contest_id
           - port
           - round_id
+          - map_id
         filter: {}
     - role: teacher
       permission:
@@ -815,6 +1031,7 @@
           - contest_id
           - port
           - round_id
+          - map_id
         filter: {}
     - role: user
       permission:
@@ -826,6 +1043,7 @@
           - contest_id
           - port
           - round_id
+          - map_id
         filter: {}
 - table:
     name: contest_room_team
