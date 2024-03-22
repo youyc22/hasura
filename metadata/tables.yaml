@@ -103,12 +103,26 @@
           table:
             name: contest_room
             schema: public
+    - name: contest_rounds
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_round
+            schema: public
     - name: contest_teams
       using:
         foreign_key_constraint_on:
           column: contest_id
           table:
             name: contest_team
+            schema: public
+    - name: contest_times
+      using:
+        foreign_key_constraint_on:
+          column: contest_id
+          table:
+            name: contest_time
             schema: public
   select_permissions:
     - role: anonymous
@@ -434,6 +448,9 @@
     - name: contest
       using:
         foreign_key_constraint_on: contest_id
+    - name: user
+      using:
+        foreign_key_constraint_on: user_uuid
   select_permissions:
     - role: anonymous
       permission:
@@ -706,6 +723,10 @@
 - table:
     name: contest_player
     schema: public
+  object_relationships:
+    - name: contest
+      using:
+        foreign_key_constraint_on: contest_id
   select_permissions:
     - role: counselor
       permission:
@@ -746,6 +767,13 @@
 - table:
     name: contest_room
     schema: public
+  object_relationships:
+    - name: contest
+      using:
+        foreign_key_constraint_on: contest_id
+    - name: contest_round
+      using:
+        foreign_key_constraint_on: round_id
   array_relationships:
     - name: contest_room_teams
       using:
@@ -857,6 +885,14 @@
     - name: contest
       using:
         foreign_key_constraint_on: contest_id
+  array_relationships:
+    - name: contest_round_rooms
+      using:
+        foreign_key_constraint_on:
+          column: round_id
+          table:
+            name: contest_room
+            schema: public
   insert_permissions:
     - role: counselor
       permission:
