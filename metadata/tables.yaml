@@ -809,34 +809,42 @@
     - role: counselor
       permission:
         columns:
-          - score
-          - players
-          - room_id
           - team_id
+          - room_id
+          - score
+          - team_label
+          - player_roles
+          - player_codes
         filter: {}
     - role: student
       permission:
         columns:
-          - score
-          - players
-          - room_id
           - team_id
+          - room_id
+          - score
+          - team_label
+          - player_roles
+          - player_codes
         filter: {}
     - role: teacher
       permission:
         columns:
-          - score
-          - players
-          - room_id
           - team_id
+          - room_id
+          - score
+          - team_label
+          - player_roles
+          - player_codes
         filter: {}
     - role: user
       permission:
         columns:
-          - score
-          - players
-          - room_id
           - team_id
+          - room_id
+          - score
+          - team_label
+          - player_roles
+          - player_codes
         filter: {}
 - table:
     name: contest_team
