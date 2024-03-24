@@ -1,0 +1,2 @@
+CREATE TABLE "public"."contest_round" ("contest_id" uuid NOT NULL, "round_id" uuid NOT NULL DEFAULT gen_random_uuid(), "name" text NOT NULL, "maps" text NOT NULL DEFAULT '[]', PRIMARY KEY ("round_id") , FOREIGN KEY ("contest_id") REFERENCES "public"."contest"("id") ON UPDATE restrict ON DELETE cascade, UNIQUE ("round_id"));COMMENT ON TABLE "public"."contest_round" IS E'正式比赛的每轮（初赛、决赛）信息';
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
