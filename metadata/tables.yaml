@@ -2373,6 +2373,35 @@
               user_uuid:
                 _eq: X-Hasura-User-Id
 - table:
+    name: department
+    schema: public
+  select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - name
+        filter: {}
+    - role: counselor
+      permission:
+        columns:
+          - name
+        filter: {}
+    - role: student
+      permission:
+        columns:
+          - name
+        filter: {}
+    - role: teacher
+      permission:
+        columns:
+          - name
+        filter: {}
+    - role: user
+      permission:
+        columns:
+          - name
+        filter: {}
+- table:
     name: honor_application
     schema: public
   object_relationships:
