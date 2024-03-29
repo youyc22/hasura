@@ -3489,9 +3489,6 @@
           - uuid
         filter: {}
 - table:
-    name: test
-    schema: public
-- table:
     name: users
     schema: public
   object_relationships:
