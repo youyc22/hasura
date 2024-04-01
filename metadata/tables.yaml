@@ -1017,6 +1017,7 @@
           - map_id
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -1030,6 +1031,7 @@
           - map_id
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -1043,6 +1045,7 @@
           - map_id
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: user
       permission:
         columns:
@@ -1056,6 +1059,7 @@
           - map_id
           - updated_at
         filter: {}
+        allow_aggregations: true
 - table:
     name: contest_room_team
     schema: public
@@ -1077,6 +1081,7 @@
           - player_roles
           - player_codes
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -1087,6 +1092,7 @@
           - player_roles
           - player_codes
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -1097,6 +1103,7 @@
           - player_roles
           - player_codes
         filter: {}
+        allow_aggregations: true
     - role: user
       permission:
         columns:
@@ -1107,6 +1114,7 @@
           - player_roles
           - player_codes
         filter: {}
+        allow_aggregations: true
 - table:
     name: contest_round
     schema: public
@@ -1421,6 +1429,7 @@
           - team_name
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -1439,6 +1448,7 @@
           - team_name
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -1457,6 +1467,7 @@
           - team_name
           - updated_at
         filter: {}
+        allow_aggregations: true
     - role: user
       permission:
         columns:
@@ -1475,6 +1486,7 @@
           - team_name
           - updated_at
         filter: {}
+        allow_aggregations: true
   update_permissions:
     - role: counselor
       permission:
@@ -1569,30 +1581,26 @@
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
 - table:
     name: contest_team_code
     schema: public
@@ -1672,6 +1680,7 @@
             contest_team_members:
               user_uuid:
                 _eq: X-Hasura-User-Id
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -1686,6 +1695,7 @@
             contest_team_members:
               user_uuid:
                 _eq: X-Hasura-User-Id
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -1700,6 +1710,7 @@
             contest_team_members:
               user_uuid:
                 _eq: X-Hasura-User-Id
+        allow_aggregations: true
     - role: user
       permission:
         columns:
@@ -1714,6 +1725,7 @@
             contest_team_members:
               user_uuid:
                 _eq: X-Hasura-User-Id
+        allow_aggregations: true
   update_permissions:
     - role: counselor
       permission:
@@ -1874,24 +1886,28 @@
           - team_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
           - team_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
           - team_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
     - role: user
       permission:
         columns:
           - team_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
   update_permissions:
     - role: counselor
       permission:
@@ -1942,26 +1958,42 @@
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
 - table:
     name: contest_team_player
     schema: public
