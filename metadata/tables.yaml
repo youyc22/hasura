@@ -1581,30 +1581,26 @@
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
         filter:
-          contest_team_members:
-            user_uuid:
-              _eq: X-Hasura-User-Id
+          team_leader_uuid:
+            _eq: X-Hasura-User-Id
 - table:
     name: contest_team_code
     schema: public
@@ -1962,26 +1958,42 @@
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: student
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: teacher
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
     - role: user
       permission:
         backend_only: false
         filter:
-          user_uuid:
-            _eq: X-Hasura-User-Id
+          _or:
+            - user_uuid:
+                _eq: X-Hasura-User-Id
+            - contest_team:
+                team_leader_uuid:
+                  _eq: X-Hasura-User-Id
 - table:
     name: contest_team_player
     schema: public
