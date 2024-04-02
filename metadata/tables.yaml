@@ -137,85 +137,90 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter: {}
     - role: counselor
       permission:
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter: {}
     - role: student
       permission:
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter: {}
     - role: teacher
       permission:
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter: {}
     - role: user
       permission:
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter: {}
   update_permissions:
     - role: counselor
@@ -223,17 +228,18 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter:
           contest_managers:
             user_uuid:
@@ -244,17 +250,18 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter:
           contest_managers:
             user_uuid:
@@ -265,17 +272,18 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter:
           contest_managers:
             user_uuid:
@@ -286,17 +294,18 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - playback_switch
-          - playground_switch
-          - stream_switch
           - contest_name
           - contest_type
           - description
-          - name
-          - status
           - end_date
-          - start_date
           - id
+          - name
+          - playback_switch
+          - playground_switch
+          - start_date
+          - status
+          - stream_switch
+          - team_switch
         filter:
           contest_managers:
             user_uuid:
