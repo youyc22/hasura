@@ -965,38 +965,34 @@
     - role: counselor
       permission:
         columns:
-          - player_num
-          - players_label
+          - contest_id
+          - player_label
           - roles_available
           - team_label
-          - contest_id
         filter: {}
     - role: student
       permission:
         columns:
-          - player_num
-          - players_label
+          - contest_id
+          - player_label
           - roles_available
           - team_label
-          - contest_id
         filter: {}
     - role: teacher
       permission:
         columns:
-          - player_num
-          - players_label
+          - contest_id
+          - player_label
           - roles_available
           - team_label
-          - contest_id
         filter: {}
     - role: user
       permission:
         columns:
-          - player_num
-          - players_label
+          - contest_id
+          - player_label
           - roles_available
           - team_label
-          - contest_id
         filter: {}
 - table:
     name: contest_room
@@ -2048,9 +2044,10 @@
               user_uuid:
                 _eq: X-Hasura-User-Id
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
     - role: student
       permission:
         check:
@@ -2059,9 +2056,10 @@
               user_uuid:
                 _eq: X-Hasura-User-Id
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
     - role: teacher
       permission:
         check:
@@ -2070,9 +2068,10 @@
               user_uuid:
                 _eq: X-Hasura-User-Id
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
     - role: user
       permission:
         check:
@@ -2081,16 +2080,18 @@
               user_uuid:
                 _eq: X-Hasura-User-Id
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
   select_permissions:
     - role: counselor
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2099,9 +2100,10 @@
     - role: student
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2110,9 +2112,10 @@
     - role: teacher
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2121,9 +2124,10 @@
     - role: user
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2133,9 +2137,10 @@
     - role: counselor
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2149,9 +2154,10 @@
     - role: student
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2165,9 +2171,10 @@
     - role: teacher
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
@@ -2181,9 +2188,10 @@
     - role: user
       permission:
         columns:
-          - team_id
           - player
+          - role
           - code_id
+          - team_id
         filter:
           contest_team:
             contest_team_members:
