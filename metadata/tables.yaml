@@ -1707,10 +1707,16 @@
           - language
           - team_id
         filter:
-          contest_team:
-            contest_team_members:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+          _or:
+            - contest_team:
+                contest_team_members:
+                  user_uuid:
+                    _eq: X-Hasura-User-Id
+            - contest_team:
+                contest:
+                  contest_managers:
+                    user_uuid:
+                      _eq: X-Hasura-User-Id
         allow_aggregations: true
     - role: student
       permission:
@@ -1722,10 +1728,16 @@
           - language
           - team_id
         filter:
-          contest_team:
-            contest_team_members:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+          _or:
+            - contest_team:
+                contest_team_members:
+                  user_uuid:
+                    _eq: X-Hasura-User-Id
+            - contest_team:
+                contest:
+                  contest_managers:
+                    user_uuid:
+                      _eq: X-Hasura-User-Id
         allow_aggregations: true
     - role: teacher
       permission:
@@ -1737,10 +1749,16 @@
           - language
           - team_id
         filter:
-          contest_team:
-            contest_team_members:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+          _or:
+            - contest_team:
+                contest_team_members:
+                  user_uuid:
+                    _eq: X-Hasura-User-Id
+            - contest_team:
+                contest:
+                  contest_managers:
+                    user_uuid:
+                      _eq: X-Hasura-User-Id
         allow_aggregations: true
     - role: user
       permission:
@@ -1752,10 +1770,16 @@
           - language
           - team_id
         filter:
-          contest_team:
-            contest_team_members:
-              user_uuid:
-                _eq: X-Hasura-User-Id
+          _or:
+            - contest_team:
+                contest_team_members:
+                  user_uuid:
+                    _eq: X-Hasura-User-Id
+            - contest_team:
+                contest:
+                  contest_managers:
+                    user_uuid:
+                      _eq: X-Hasura-User-Id
         allow_aggregations: true
   update_permissions:
     - role: counselor
