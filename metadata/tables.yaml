@@ -137,7 +137,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -155,7 +155,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -173,7 +173,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -191,7 +191,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -209,7 +209,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -228,7 +228,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -250,7 +250,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -272,7 +272,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
@@ -294,7 +294,7 @@
         columns:
           - arena_switch
           - code_upload_switch
-          - contest_name
+          - fullname
           - contest_type
           - description
           - end_date
