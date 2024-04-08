@@ -962,6 +962,14 @@
       using:
         foreign_key_constraint_on: contest_id
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - contest_id
+          - player_label
+          - roles_available
+          - team_label
+        filter: {}
     - role: counselor
       permission:
         columns:
@@ -1016,6 +1024,20 @@
             name: contest_room_team
             schema: public
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - status
+          - result
+          - created_at
+          - room_id
+          - contest_id
+          - port
+          - round_id
+          - map_id
+          - updated_at
+        filter: {}
+        allow_aggregations: true
     - role: counselor
       permission:
         columns:
@@ -1083,6 +1105,17 @@
       using:
         foreign_key_constraint_on: team_id
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - team_id
+          - room_id
+          - score
+          - team_label
+          - player_roles
+          - player_codes
+        filter: {}
+        allow_aggregations: true
     - role: counselor
       permission:
         columns:
@@ -1195,6 +1228,14 @@
           - name
           - round_id
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - name
+          - contest_id
+          - map_id
+          - round_id
+        filter: {}
     - role: counselor
       permission:
         columns:
@@ -1442,6 +1483,25 @@
           - team_name
           - updated_at
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - contest_id
+          - contest_score
+          - created_at
+          - invited_code
+          - member_num
+          - score
+          - status
+          - status2
+          - submitted_code_num
+          - team_id
+          - team_intro
+          - team_leader_uuid
+          - team_name
+          - updated_at
+        filter: {}
+        allow_aggregations: true
     - role: counselor
       permission:
         columns:
@@ -1935,6 +1995,13 @@
           - team_id
           - user_uuid
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - team_id
+          - user_uuid
+        filter: {}
+        allow_aggregations: true
     - role: counselor
       permission:
         columns:
@@ -3601,6 +3668,24 @@
             name: mentor_application
             schema: public
   select_permissions:
+    - role: anonymous
+      permission:
+        columns:
+          - class
+          - created_at
+          - department
+          - email
+          - github_id
+          - id
+          - phone
+          - realname
+          - role
+          - student_no
+          - tsinghua_email
+          - updated_at
+          - username
+          - uuid
+        filter: {}
     - role: counselor
       permission:
         columns:
