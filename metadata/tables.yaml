@@ -2406,9 +2406,11 @@
       permission:
         columns:
           - comment
-          - created_at
-          - updated_at
           - course_id
+          - created_at
+          - like
+          - star
+          - updated_at
           - user_uuid
           - uuid
         filter: {}
@@ -2416,9 +2418,11 @@
       permission:
         columns:
           - comment
-          - created_at
-          - updated_at
           - course_id
+          - created_at
+          - like
+          - star
+          - updated_at
           - user_uuid
           - uuid
         filter: {}
