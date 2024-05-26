@@ -2334,6 +2334,7 @@
           - type
           - uuid
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -2347,6 +2348,7 @@
           - type
           - uuid
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -2360,6 +2362,7 @@
           - type
           - uuid
         filter: {}
+        allow_aggregations: true
 - table:
     name: course_comment
     schema: public
@@ -2434,6 +2437,7 @@
           - user_uuid
           - uuid
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -2444,6 +2448,7 @@
           - user_uuid
           - uuid
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -2454,6 +2459,7 @@
           - user_uuid
           - uuid
         filter: {}
+        allow_aggregations: true
   update_permissions:
     - role: counselor
       permission:
@@ -2957,6 +2963,7 @@
           - course_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
     - role: student
       permission:
         columns:
@@ -2971,6 +2978,7 @@
           - course_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
     - role: teacher
       permission:
         columns:
@@ -2985,6 +2993,7 @@
           - course_id
           - user_uuid
         filter: {}
+        allow_aggregations: true
   update_permissions:
     - role: counselor
       permission:
