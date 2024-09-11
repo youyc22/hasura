@@ -2952,13 +2952,8 @@
     - role: student
       permission:
         check:
-          _and:
-            - student_uuid:
-                _eq: X-Hasura-User-Id
-            - created_at:
-                _lt: "2022-10-05T23:59:59+08:00"
-            - created_at:
-                _gt: "2022-10-01T00:00:00+08:00"
+          student_uuid:
+            _eq: X-Hasura-User-Id
         columns:
           - attachment_url
           - honor
@@ -3013,26 +3008,16 @@
           - student_uuid
           - year
         filter:
-          _and:
-            - student_uuid:
-                _eq: X-Hasura-User-Id
-            - updated_at:
-                _lt: "2022-10-05T23:59:59+08:00"
-            - updated_at:
-                _gt: "2022-10-01T00:00:00+08:00"
+          student_uuid:
+            _eq: X-Hasura-User-Id
         check: {}
   delete_permissions:
     - role: student
       permission:
         backend_only: false
         filter:
-          _and:
-            - student_uuid:
-                _eq: X-Hasura-User-Id
-            - created_at:
-                _lt: "2022-10-05T23:59:59+08:00"
-            - created_at:
-                _gt: "2022-10-01T00:00:00+08:00"
+          student_uuid:
+            _eq: X-Hasura-User-Id
 - table:
     name: honor_time
     schema: public
