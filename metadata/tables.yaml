@@ -2312,6 +2312,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2324,6 +2325,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2336,6 +2338,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2348,6 +2351,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2361,6 +2365,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2374,6 +2379,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2388,6 +2394,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2401,6 +2408,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -2414,6 +2422,7 @@
           - course_id
           - created_at
           - deleted
+          - display
           - parent_uuid
           - updated_at
           - user_uuid
@@ -3089,6 +3098,19 @@
       permission:
         backend_only: false
         filter: {}
+- table:
+    name: manager_permissions
+    schema: public
+- table:
+    name: manager_user_permissions
+    schema: public
+  object_relationships:
+    - name: manager_permission
+      using:
+        foreign_key_constraint_on: permission_id
+    - name: user
+      using:
+        foreign_key_constraint_on: uuid
 - table:
     name: mentor_application
     schema: public
